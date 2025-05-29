@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +12,10 @@ const Navigation = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    
+    // Trigger initial load animation
+    setTimeout(() => setIsLoaded(true), 100);
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,57 +35,109 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleNavClick = (href) => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById(href.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
         isScrolled 
-          ? 'h-16 glass-effect shadow-lg' 
-          : 'h-20 bg-transparent'
+          ? 'h-14 sm:h-16 md:h-18 lg:h-20 backdrop-blur-xl bg-gray-900/80 shadow-2xl border-b border-white/10' 
+          : 'h-16 sm:h-18 md:h-20 lg:h-24 bg-transparent'
+      } ${
+        isLoaded 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 -translate-y-full'
       }`}>
-        <div className="container-custom h-full flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-electric-blue to-brand-violet rounded-lg flex items-center justify-center font-display font-bold text-white text-xl animate-glow">
-              YT
+          <div className={`flex items-center space-x-2 sm:space-x-3 transition-all duration-500 ${
+            isLoaded 
+              ? 'opacity-100 translate-x-0' 
+              : 'opacity-0 -translate-x-8'
+          }`}>
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-white transition-all duration-500 hover:scale-110 hover:rotate-3 ${
+              isScrolled ? 'shadow-lg' : 'shadow-2xl'
+            }`}>
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl">YT</span>
             </div>
-            <div className="hidden sm:block">
-              <h1 className="font-display font-bold text-xl text-white">
+            <div className="hidden xs:block">
+              <h1 className="font-bold text-white transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl">
                 Yubhian Technologies
               </h1>
-              <p className="text-xs text-gray-400 -mt-1">EST. 2024</p>
+              <p className="text-xs sm:text-xs md:text-sm text-gray-400 -mt-0.5 sm:-mt-1 transition-all duration-300">
+                EST. 2024
+              </p>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navItems.map((item, index) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="relative text-gray-300 hover:text-white transition-colors duration-300 font-medium group"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
+                className={`relative text-gray-300 hover:text-white transition-all duration-300 font-medium group cursor-pointer ${
+                  isScrolled ? 'text-sm lg:text-base' : 'text-base lg:text-lg'
+                } ${
+                  isLoaded 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-4'
+                }`}
+                style={{ 
+                  transitionDelay: `${200 + index * 100}ms`,
+                  animation: isLoaded ? `slideInDown 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none'
+                }}
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-electric-blue to-brand-violet transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 blur-sm transition-all duration-300 group-hover:w-full opacity-50"></span>
               </a>
             ))}
           </div>
 
           {/* CTA Button & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             <button 
               onClick={handleGetInTouchClick}
-              className="hidden sm:block btn-primary text-sm"
+              className={`hidden sm:inline-flex items-center justify-center px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group ${
+                isScrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'
+              } ${
+                isLoaded 
+                  ? 'opacity-100 translate-x-0' 
+                  : 'opacity-0 translate-x-8'
+              }`}
+              style={{ transitionDelay: '600ms' }}
             >
-              Get in Touch
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                Get in Touch
+              </span>
             </button>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg glass-effect text-white"
+              className={`lg:hidden p-2 sm:p-2.5 rounded-lg backdrop-blur-sm bg-white/10 text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-105 ${
+                isMobileMenuOpen ? 'rotate-180 bg-white/20' : 'rotate-0'
+              } ${
+                isLoaded 
+                  ? 'opacity-100 translate-x-0' 
+                  : 'opacity-0 translate-x-8'
+              }`}
+              style={{ transitionDelay: '700ms' }}
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              <div className="transition-transform duration-300">
+                {isMobileMenuOpen ? <X size={18} className="sm:w-5 sm:h-5" /> : <Menu size={18} className="sm:w-5 sm:h-5" />}
+              </div>
             </button>
           </div>
         </div>
@@ -93,37 +149,137 @@ const Navigation = () => {
           ? 'opacity-100 pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}>
-        <div className="absolute inset-0 bg-rich-black/95 backdrop-blur-xl">
-          <div className="container-custom pt-24 px-6">
-            <div className="space-y-6">
+        <div className="absolute inset-0 bg-gray-900/95 backdrop-blur-xl">
+          {/* Animated Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          </div>
+          
+          <div className="relative max-w-md mx-auto pt-20 sm:pt-24 px-6 sm:px-8">
+            <div className="space-y-4 sm:space-y-6">
               {navItems.map((item, index) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-2xl font-semibold text-white hover:text-electric-blue transition-colors duration-300"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.href);
+                  }}
+                  className={`block text-xl sm:text-2xl md:text-3xl font-semibold text-white hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2 hover:scale-105 cursor-pointer ${
+                    isMobileMenuOpen 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
+                  }`}
                   style={{ 
-                    animation: `fadeIn 0.6s ease-out ${index * 0.1}s both`,
-                    opacity: isMobileMenuOpen ? 1 : 0
+                    transitionDelay: `${index * 100}ms`,
+                    animation: isMobileMenuOpen ? `fadeInUp 0.6s ease-out ${index * 0.1}s both` : 'none'
                   }}
                 >
-                  {item.name}
+                  <span className="relative">
+                    {item.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                 </a>
               ))}
-              <button 
-                onClick={handleGetInTouchClick}
-                className="btn-primary w-full mt-8"
-                style={{ 
-                  animation: 'fadeIn 0.6s ease-out 0.5s both',
-                  opacity: isMobileMenuOpen ? 1 : 0
-                }}
-              >
-                Get in Touch
-              </button>
+              
+              <div className="pt-6 sm:pt-8">
+                <button 
+                  onClick={handleGetInTouchClick}
+                  className={`w-full py-3 sm:py-4 px-6 sm:px-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-base sm:text-lg ${
+                    isMobileMenuOpen 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ 
+                    transitionDelay: '500ms',
+                    animation: isMobileMenuOpen ? 'fadeInUp 0.6s ease-out 0.5s both' : 'none'
+                  }}
+                >
+                  Get in Touch
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes slideInDown {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          
+          /* Custom responsive breakpoint for very small screens */
+          @media (min-width: 475px) {
+            .xs\\:block {
+              display: block;
+            }
+          }
+          
+          /* Enhanced mobile menu animations */
+          @media (max-width: 1023px) {
+            .mobile-menu-item {
+              position: relative;
+              overflow: hidden;
+            }
+            
+            .mobile-menu-item::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+              transition: left 0.5s;
+            }
+            
+            .mobile-menu-item:hover::before {
+              left: 100%;
+            }
+          }
+          
+          /* Smooth scrolling for the entire page */
+          html {
+            scroll-behavior: smooth;
+          }
+          
+          /* Enhanced backdrop blur support */
+          @supports (backdrop-filter: blur(12px)) {
+            .backdrop-blur-xl {
+              backdrop-filter: blur(12px);
+            }
+          }
+        `
+      }} />
     </>
   );
 };

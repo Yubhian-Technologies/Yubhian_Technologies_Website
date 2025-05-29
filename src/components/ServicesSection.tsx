@@ -152,7 +152,7 @@ const ServicesSection = () => {
         >
           <div
             ref={scrollContainerRef}
-            className="flex gap-8 overflow-x-scroll scrollbar-hide px-4 sm:px-8"
+            className="flex gap-8 overflow-x-scroll -mx-8 scrollbar-hide py-4 px-1 sm:px-8"
           >
             {[...services, ...services].map((service, index) => {
               const IconComponent = service.icon;
