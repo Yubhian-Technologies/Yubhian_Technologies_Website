@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +15,13 @@ const ContactSection = () => {
     email: "",
     phone: "",
     subject: "",
+    message: "",
+  });
+
+  const [submitStatus, setSubmitStatus] = useState({
+    isSubmitting: false,
+    success: false,
+    error: false,
     message: "",
   });
 
@@ -19,10 +34,70 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Here you would typically send the data to your backend
+    setSubmitStatus({
+      isSubmitting: true,
+      success: false,
+      error: false,
+      message: "",
+    });
+
+    try {
+      // Replace this URL with your Google Apps Script Web App URL
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycby49GVs7mjUju04X4qzQ_zhI93z7a84gRDBRxi5BCQ5LuCe3rWAgVVGDmVKzvyelu_C/exec";
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Important for Google Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      // Since we're using no-cors mode, we can't read the response
+      // We'll assume success if no error is thrown
+      setSubmitStatus({
+        isSubmitting: false,
+        success: true,
+        error: false,
+        message:
+          "Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.",
+      });
+
+      // Clear form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus((prev) => ({ ...prev, success: false, message: "" }));
+      }, 5000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus({
+        isSubmitting: false,
+        success: false,
+        error: true,
+        message:
+          "Sorry, there was an error sending your message. Please try again or contact us directly.",
+      });
+
+      // Auto-hide error message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus((prev) => ({ ...prev, error: false, message: "" }));
+      }, 5000);
+    }
   };
 
   const contactInfo = [
@@ -55,13 +130,15 @@ const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="section-padding bg-gradient-to-b from-transparent to-rich-black"
+      className="min-h-screen py-20 bg-gradient-to-b from-transparent to-rich-black/50"
     >
-      <div className="container-custom">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-            <span className="gradient-text">Get In Touch</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+              Get In Touch
+            </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Let's Build Something Amazing Together
@@ -81,7 +158,22 @@ const ContactSection = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Status Messages */}
+            {submitStatus.success && (
+              <div className="flex items-center space-x-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
+                <p className="text-green-400">{submitStatus.message}</p>
+              </div>
+            )}
+
+            {submitStatus.error && (
+              <div className="flex items-center space-x-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
+                <p className="text-red-400">{submitStatus.message}</p>
+              </div>
+            )}
+
+            <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="relative">
                   <input
@@ -90,7 +182,8 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue focus:bg-white/10 transition-all duration-300"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white/10 transition-all duration-300 disabled:opacity-50"
                     placeholder="Your Name"
                   />
                 </div>
@@ -101,7 +194,8 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue focus:bg-white/10 transition-all duration-300"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white/10 transition-all duration-300 disabled:opacity-50"
                     placeholder="Your Email"
                   />
                 </div>
@@ -114,7 +208,8 @@ const ContactSection = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue focus:bg-white/10 transition-all duration-300"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white/10 transition-all duration-300 disabled:opacity-50"
                     placeholder="Phone Number"
                   />
                 </div>
@@ -125,7 +220,8 @@ const ContactSection = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue focus:bg-white/10 transition-all duration-300"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white/10 transition-all duration-300 disabled:opacity-50"
                     placeholder="Subject"
                   />
                 </div>
@@ -138,16 +234,30 @@ const ContactSection = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue focus:bg-white/10 transition-all duration-300 resize-none"
+                  disabled={submitStatus.isSubmitting}
+                  className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white/10 transition-all duration-300 resize-none disabled:opacity-50"
                   placeholder="Your Message"
                 />
               </div>
 
-              <button type="submit" className="w-full btn-primary group">
-                Send Message
-                <Send className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <button
+                onClick={handleSubmit}
+                disabled={submitStatus.isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center group"
+              >
+                {submitStatus.isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </>
+                )}
               </button>
-            </form>
+            </div>
           </div>
 
           {/* Contact Information */}
@@ -156,9 +266,6 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold text-white mb-4">
                 Contact Information
               </h3>
-              {/* <p className="text-gray-400">
-                Reach out to us through any of the following channels. We're here to help!
-              </p> */}
             </div>
 
             <div className="space-y-6">
@@ -167,12 +274,12 @@ const ContactSection = () => {
                 return (
                   <div
                     key={index}
-                    className="flex items-start space-x-4 p-6 glass-effect rounded-xl hover:bg-white/10 transition-all duration-300 cursor-pointer group"
+                    className="flex items-start space-x-4 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 cursor-pointer group"
                     style={{
                       animation: `fadeIn 0.6s ease-out ${index * 0.1}s both`,
                     }}
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-electric-blue to-brand-violet rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -184,7 +291,7 @@ const ContactSection = () => {
                       ) : (
                         <a
                           href={info.href}
-                          className="text-gray-400 hover:text-electric-blue transition-colors duration-300"
+                          className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
                         >
                           {info.content}
                         </a>
@@ -194,20 +301,22 @@ const ContactSection = () => {
                 );
               })}
             </div>
-
-            {/* Map Placeholder */}
-            {/* <div className="glass-effect rounded-xl p-6">
-              <h4 className="font-semibold text-white mb-4">Our Location</h4>
-              <div className="aspect-video bg-gradient-to-br from-electric-blue/20 to-brand-violet/20 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-electric-blue mx-auto mb-2" />
-                  <p className="text-gray-400">Interactive Map Coming Soon</p>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 };
