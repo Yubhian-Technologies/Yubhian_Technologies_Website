@@ -36,6 +36,18 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Optional custom validation example
+    if (!formData.email.includes("@")) {
+      setSubmitStatus({
+        isSubmitting: false,
+        success: false,
+        error: true,
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
     setSubmitStatus({
       isSubmitting: true,
       success: false,
@@ -44,13 +56,12 @@ const ContactSection = () => {
     });
 
     try {
-      // Replace this URL with your Google Apps Script Web App URL
       const GOOGLE_SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycby49GVs7mjUju04X4qzQ_zhI93z7a84gRDBRxi5BCQ5LuCe3rWAgVVGDmVKzvyelu_C/exec";
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // Important for Google Apps Script
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -60,8 +71,6 @@ const ContactSection = () => {
         }),
       });
 
-      // Since we're using no-cors mode, we can't read the response
-      // We'll assume success if no error is thrown
       setSubmitStatus({
         isSubmitting: false,
         success: true,
@@ -70,7 +79,6 @@ const ContactSection = () => {
           "Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.",
       });
 
-      // Clear form
       setFormData({
         name: "",
         email: "",
@@ -79,7 +87,6 @@ const ContactSection = () => {
         message: "",
       });
 
-      // Auto-hide success message after 5 seconds
       setTimeout(() => {
         setSubmitStatus((prev) => ({ ...prev, success: false, message: "" }));
       }, 5000);
@@ -93,7 +100,6 @@ const ContactSection = () => {
           "Sorry, there was an error sending your message. Please try again or contact us directly.",
       });
 
-      // Auto-hide error message after 5 seconds
       setTimeout(() => {
         setSubmitStatus((prev) => ({ ...prev, error: false, message: "" }));
       }, 5000);
@@ -173,7 +179,7 @@ const ContactSection = () => {
               </div>
             )}
 
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="relative">
                   <input
@@ -241,7 +247,7 @@ const ContactSection = () => {
               </div>
 
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={submitStatus.isSubmitting}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center group"
               >
@@ -257,10 +263,10 @@ const ContactSection = () => {
                   </>
                 )}
               </button>
-            </div>
+            </form>
           </div>
 
-          {/* Contact Information */}
+          {/* Contact Info Section */}
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">

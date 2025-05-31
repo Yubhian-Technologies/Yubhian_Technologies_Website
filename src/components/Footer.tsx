@@ -33,9 +33,12 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/yubhian-technologies/posts/?feedView=all",
+      name: "LinkedIn",
+    },
     { icon: Twitter, href: "#", name: "Twitter" },
-    { icon: Github, href: "#", name: "GitHub" },
     { icon: Instagram, href: "#", name: "Instagram" },
   ];
 
