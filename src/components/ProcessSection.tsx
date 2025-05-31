@@ -21,7 +21,7 @@ const ProcessSection = () => {
   const [visibleSteps, setVisibleSteps] = useState([]);
   const [sprintVisible, setSprintVisible] = useState(false);
   const totalSprints = 3;
-  
+
   const sectionRef = useRef(null);
   const stepsRef = useRef([]);
   const sprintRef = useRef(null);
@@ -85,7 +85,7 @@ const ProcessSection = () => {
           setHasAnimated(true);
         }
       },
-      { threshold: 0.2, rootMargin: '-50px' }
+      { threshold: 0.2, rootMargin: "-50px" }
     );
 
     if (sectionRef.current) {
@@ -99,11 +99,11 @@ const ProcessSection = () => {
   useEffect(() => {
     const observers = stepsRef.current.map((stepRef, index) => {
       if (!stepRef) return null;
-      
+
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setVisibleSteps(prev => {
+            setVisibleSteps((prev) => {
               if (!prev.includes(index)) {
                 return [...prev, index];
               }
@@ -111,7 +111,7 @@ const ProcessSection = () => {
             });
           }
         },
-        { threshold: 0.3, rootMargin: '-20px' }
+        { threshold: 0.3, rootMargin: "-20px" }
       );
 
       observer.observe(stepRef);
@@ -119,7 +119,7 @@ const ProcessSection = () => {
     });
 
     return () => {
-      observers.forEach(observer => observer?.disconnect());
+      observers.forEach((observer) => observer?.disconnect());
     };
   }, []);
 
@@ -131,7 +131,7 @@ const ProcessSection = () => {
           setSprintVisible(true);
         }
       },
-      { threshold: 0.2, rootMargin: '-30px' }
+      { threshold: 0.2, rootMargin: "-30px" }
     );
 
     if (sprintRef.current) {
@@ -178,11 +178,11 @@ const ProcessSection = () => {
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className={`text-center mb-12 sm:mb-16 lg:mb-20 transition-all duration-1000 ${
-          isVisible 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-10'
-        }`}>
+        <div
+          className={`text-center mb-12 sm:mb-16 lg:mb-20 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             <span className="text-white">Our Work</span>
             <br />
@@ -204,33 +204,39 @@ const ProcessSection = () => {
               const isStepVisible = visibleSteps.includes(index);
 
               return (
-                <div 
-                  key={index} 
-                  ref={el => stepsRef.current[index] = el}
+                <div
+                  key={index}
+                  ref={(el) => (stepsRef.current[index] = el)}
                   className="flex flex-col items-center relative"
                 >
                   {/* Step Content */}
-                  <div className={`text-center group w-full max-w-sm mx-auto transition-all duration-700 ${
-                    isStepVisible 
-                      ? 'opacity-100 translate-y-0 scale-100' 
-                      : 'opacity-0 translate-y-16 scale-95'
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}>
+                  <div
+                    className={`text-center group w-full max-w-sm mx-auto transition-all duration-700 ${
+                      isStepVisible
+                        ? "opacity-100 translate-y-0 scale-100"
+                        : "opacity-0 translate-y-16 scale-95"
+                    }`}
+                    style={{ transitionDelay: `${index * 200}ms` }}
+                  >
                     {/* Step Number & Icon */}
                     <div className="relative mb-6 sm:mb-8 flex justify-center">
                       <div
-                        className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center relative group-hover:scale-110 transition-all duration-500 shadow-2xl ${
-                          isStepVisible ? 'animate-bounce-once' : ''
+                        className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br ${
+                          step.color
+                        } flex items-center justify-center relative group-hover:scale-110 transition-all duration-500 shadow-2xl ${
+                          isStepVisible ? "animate-bounce-once" : ""
                         }`}
                         style={{ animationDelay: `${index * 300 + 500}ms` }}
                       >
                         <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white" />
 
                         {/* Step Number */}
-                        <div className={`absolute -top-2 -right-2 w-7 h-7 sm:w-8 sm:h-8 bg-gray-900 rounded-full flex items-center justify-center border-2 border-white/20 shadow-lg transition-all duration-500 ${
-                          isStepVisible ? 'scale-110 rotate-12' : 'scale-0'
-                        }`}
-                        style={{ transitionDelay: `${index * 300 + 800}ms` }}>
+                        <div
+                          className={`absolute -top-2 -right-2 w-7 h-7 sm:w-8 sm:h-8 bg-gray-900 rounded-full flex items-center justify-center border-2 border-white/20 shadow-lg transition-all duration-500 ${
+                            isStepVisible ? "scale-110 rotate-12" : "scale-0"
+                          }`}
+                          style={{ transitionDelay: `${index * 300 + 800}ms` }}
+                        >
                           <span className="text-sm font-bold text-white">
                             {index + 1}
                           </span>
@@ -239,12 +245,14 @@ const ProcessSection = () => {
                     </div>
 
                     {/* Content */}
-                    <div className={`space-y-3 sm:space-y-4 px-4 sm:px-0 transition-all duration-600 ${
-                      isStepVisible 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-8'
-                    }`}
-                    style={{ transitionDelay: `${index * 300 + 600}ms` }}>
+                    <div
+                      className={`space-y-3 sm:space-y-4 px-4 sm:px-0 transition-all duration-600 ${
+                        isStepVisible
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-8"
+                      }`}
+                      style={{ transitionDelay: `${index * 300 + 600}ms` }}
+                    >
                       <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
                         {step.title}
                       </h3>
@@ -257,12 +265,14 @@ const ProcessSection = () => {
                     </div>
 
                     {/* Decorative Element */}
-                    <div className={`mt-6 sm:mt-8 flex justify-center transition-all duration-500 ${
-                      isStepVisible 
-                        ? 'opacity-100 scale-100' 
-                        : 'opacity-0 scale-0'
-                    }`}
-                    style={{ transitionDelay: `${index * 300 + 900}ms` }}>
+                    <div
+                      className={`mt-6 sm:mt-8 flex justify-center transition-all duration-500 ${
+                        isStepVisible
+                          ? "opacity-100 scale-100"
+                          : "opacity-0 scale-0"
+                      }`}
+                      style={{ transitionDelay: `${index * 300 + 900}ms` }}
+                    >
                       <div
                         className={`w-12 sm:w-16 h-1 bg-gradient-to-r ${step.color} rounded-full`}
                       ></div>
@@ -271,24 +281,28 @@ const ProcessSection = () => {
 
                   {/* Desktop Arrow (only between steps) */}
                   {!isLast && (
-                    <div className={`hidden lg:flex absolute top-8 xl:top-10 -right-6 xl:-right-8 z-20 transition-all duration-700 ${
-                      isStepVisible 
-                        ? 'opacity-100 translate-x-0' 
-                        : 'opacity-0 -translate-x-4'
-                    }`}
-                    style={{ transitionDelay: `${index * 300 + 1000}ms` }}>
+                    <div
+                      className={`hidden lg:flex absolute top-8 xl:top-10 -right-6 xl:-right-8 z-20 transition-all duration-700 ${
+                        isStepVisible
+                          ? "opacity-100 translate-x-0"
+                          : "opacity-0 -translate-x-4"
+                      }`}
+                      style={{ transitionDelay: `${index * 300 + 1000}ms` }}
+                    >
                       <ArrowRight className="w-6 h-6 xl:w-8 xl:h-8 text-blue-400 animate-pulse" />
                     </div>
                   )}
 
                   {/* Mobile Arrow (vertical, below each step except the last) */}
                   {!isLast && (
-                    <div className={`lg:hidden flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 transition-all duration-700 ${
-                      isStepVisible 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: `${index * 300 + 1000}ms` }}>
+                    <div
+                      className={`lg:hidden flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 transition-all duration-700 ${
+                        isStepVisible
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4"
+                      }`}
+                      style={{ transitionDelay: `${index * 300 + 1000}ms` }}
+                    >
                       <div className="flex flex-col items-center">
                         <div className="w-px h-6 sm:h-8 bg-gradient-to-b from-blue-400 to-transparent"></div>
                         <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 animate-pulse" />
@@ -304,22 +318,26 @@ const ProcessSection = () => {
 
         {/* Sprint Animation Section */}
         <div className="mb-16 sm:mb-20" ref={sprintRef}>
-          <div className={`bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 relative overflow-hidden transition-all duration-1000 ${
-            sprintVisible 
-              ? 'opacity-100 translate-y-0 scale-100' 
-              : 'opacity-0 translate-y-12 scale-95'
-          }`}>
+          <div
+            className={`bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 relative overflow-hidden transition-all duration-1000 ${
+              sprintVisible
+                ? "opacity-100 translate-y-0 scale-100"
+                : "opacity-0 translate-y-12 scale-95"
+            }`}
+          >
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-emerald-500/5 rounded-2xl sm:rounded-3xl"></div>
 
             <div className="relative z-10">
               {/* Header */}
-              <div className={`text-center mb-8 sm:mb-12 transition-all duration-800 ${
-                sprintVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '200ms' }}>
+              <div
+                className={`text-center mb-8 sm:mb-12 transition-all duration-800 ${
+                  sprintVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
+                style={{ transitionDelay: "200ms" }}
+              >
                 <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
                   <RefreshCcw className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 animate-spin" />
                   <span className="text-xs sm:text-sm font-medium text-white">
@@ -337,12 +355,14 @@ const ProcessSection = () => {
               </div>
 
               {/* Progress Section */}
-              <div className={`bg-gray-900/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-white/5 transition-all duration-800 ${
-                sprintVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-6'
-              }`}
-              style={{ transitionDelay: '400ms' }}>
+              <div
+                className={`bg-gray-900/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-white/5 transition-all duration-800 ${
+                  sprintVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
+                }`}
+                style={{ transitionDelay: "400ms" }}
+              >
                 {/* Progress Bar */}
                 <div className="relative mb-6 sm:mb-8">
                   <div className="flex items-center justify-between mb-2 sm:mb-3">
@@ -358,7 +378,7 @@ const ProcessSection = () => {
                       className="h-full bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 transition-all duration-300 ease-out rounded-full relative"
                       style={{ width: `${progressValue}%` }}
                     >
-                        <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
+                      <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
                     </div>
                   </div>
                 </div>
@@ -382,9 +402,9 @@ const ProcessSection = () => {
                             ? "bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border-emerald-400/40"
                             : "bg-gray-800/30 border-gray-700/30"
                         } group hover:scale-105 transform ${
-                          sprintVisible 
-                            ? 'opacity-100 translate-y-0' 
-                            : 'opacity-0 translate-y-4'
+                          sprintVisible
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-4"
                         }`}
                         style={{ transitionDelay: `${600 + index * 100}ms` }}
                       >
@@ -433,12 +453,14 @@ const ProcessSection = () => {
               </div>
 
               {/* Sprint Info */}
-              <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 transition-all duration-800 ${
-                sprintVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '800ms' }}>
+              <div
+                className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 transition-all duration-800 ${
+                  sprintVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+                style={{ transitionDelay: "800ms" }}
+              >
                 <div className="flex items-center space-x-3 sm:space-x-4">
                   <div className="bg-emerald-500/20 rounded-full p-2 border border-emerald-500/30 flex-shrink-0">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400" />
@@ -455,7 +477,9 @@ const ProcessSection = () => {
 
                 <div className="flex items-center justify-between sm:justify-end sm:space-x-6">
                   <div className="text-center">
-                    <p className="text-xs sm:text-sm text-gray-400">Current Sprint</p>
+                    <p className="text-xs sm:text-sm text-gray-400">
+                      Current Sprint
+                    </p>
                     <p className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">
                       {currentSprint} / {totalSprints}
                     </p>
@@ -486,12 +510,14 @@ const ProcessSection = () => {
         </div>
 
         {/* Call to Action */}
-        <div className={`text-center transition-all duration-1000 ${
-          sprintVisible 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-8'
-        }`}
-        style={{ transitionDelay: '1000ms' }}>
+        <div
+          className={`text-center transition-all duration-1000 ${
+            sprintVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: "1000ms" }}
+        >
           <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl sm:rounded-2xl max-w-2xl mx-auto">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
               Ready to Start Your Project?
@@ -500,7 +526,15 @@ const ProcessSection = () => {
               Let's transform your ideas into reality with our proven
               development process.
             </p>
-            <button className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg sm:rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
+            <button
+              onClick={() => {
+                const element = document.getElementById("contact");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg sm:rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+            >
               <span className="text-sm sm:text-base">Start Your Journey</span>
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
@@ -508,8 +542,9 @@ const ProcessSection = () => {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           @keyframes bounce-once {
             0%, 20%, 53%, 80%, 100% {
               transform: translateY(0);
@@ -528,8 +563,9 @@ const ProcessSection = () => {
           .animate-bounce-once {
             animation: bounce-once 1s ease-out;
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </section>
   );
 };
