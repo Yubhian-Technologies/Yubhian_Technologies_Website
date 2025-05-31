@@ -77,20 +77,22 @@ const ServicesSection = () => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    let scrollAmount = 0;
     const scrollSpeed = 0.5;
 
     const scroll = () => {
       if (!isPausedRef.current && container) {
-        scrollAmount += scrollSpeed;
         const cardWidth = container.querySelector(".card")?.clientWidth || 300;
         const gap = 32;
         const totalCardWidth = cardWidth + gap;
         const totalWidth = services.length * totalCardWidth;
 
-        if (scrollAmount >= totalWidth) scrollAmount = 0;
-
-        container.scrollLeft = scrollAmount;
+        // Get current scroll position and add scroll speed
+        const currentScroll = container.scrollLeft + scrollSpeed;
+        
+        // Reset to 0 when we've scrolled past the original set of cards
+        const newScrollPosition = currentScroll >= totalWidth ? 0 : currentScroll;
+        
+        container.scrollLeft = newScrollPosition;
       }
 
       scrollAnimationRef.current = requestAnimationFrame(scroll);
@@ -107,13 +109,16 @@ const ServicesSection = () => {
   const handleMouseEnter = () => {
     isPausedRef.current = true;
   };
+  
   const handleMouseLeave = () => {
     isPausedRef.current = false;
   };
+  
   const handleTouchStart = () => {
     setIsTouching(true);
     isPausedRef.current = true;
   };
+  
   const handleTouchEnd = () => {
     setIsTouching(false);
     isPausedRef.current = false;
