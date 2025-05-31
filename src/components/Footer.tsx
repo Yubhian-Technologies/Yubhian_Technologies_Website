@@ -1,32 +1,42 @@
-import React from 'react';
-import { ArrowUp, Linkedin, Twitter, Github, Instagram, Mail, Phone, MapPin, Clock } from 'lucide-react';
-import ScrollToTopButton from './ScrollToTopButton';
+import React from "react";
+import {
+  ArrowUp,
+  Linkedin,
+  Twitter,
+  Github,
+  Instagram,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+} from "lucide-react";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 const Footer = () => {
   const services = [
-    'AI/ML Development',
-    'Web Applications',
-    'Blockchain Solutions',
-    'Backend Services',
-    'SEO & Digital Marketing',
-    'Student Training Programs'
+    "AI/ML Development",
+    "Web Applications",
+    "Blockchain Solutions",
+    "Backend Services",
+    "SEO & Digital Marketing",
+    "Student Training Programs",
   ];
 
   const company = [
-    'About Us',
-    'Our Process',
-    'Case Studies',
-    'Careers',
-    'Blog',
-    'Privacy Policy',
-    'Terms of Service'
+    "About Us",
+    "Our Process",
+    "Case Studies",
+    "Careers",
+    "Blog",
+    "Privacy Policy",
+    "Terms of Service",
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: '#', name: 'LinkedIn' },
-    { icon: Twitter, href: '#', name: 'Twitter' },
-    { icon: Github, href: '#', name: 'GitHub' },
-    { icon: Instagram, href: '#', name: 'Instagram' }
+    { icon: Linkedin, href: "#", name: "LinkedIn" },
+    { icon: Twitter, href: "#", name: "Twitter" },
+    { icon: Github, href: "#", name: "GitHub" },
+    { icon: Instagram, href: "#", name: "Instagram" },
   ];
 
   return (
@@ -37,8 +47,15 @@ const Footer = () => {
           {/* Company Brand */}
           <div className="space-y-6 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-3 space-y-3 sm:space-y-0">
-              <div className="w-12 h-12 bg-gradient-to-br from-electric-blue to-brand-violet rounded-lg flex items-center justify-center font-display font-bold text-white text-xl">
-                YT
+              <div
+                className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-white transition-all duration-500 hover:scale-110 hover:rotate-3
+                shadow-2xl"
+              >
+                <img
+                  src="/logo_bg.png"
+                  alt="Logo"
+                  className="w-6 h-6 md:w-9 md:h-9"
+                />
               </div>
               <div>
                 <h3 className="font-display font-bold text-xl text-white">
@@ -49,7 +66,9 @@ const Footer = () => {
             </div>
 
             <p className="text-gray-400 leading-relaxed">
-              Leading IT Solutions Provider specializing in cutting-edge technology solutions that drive business growth and digital transformation.
+              Leading IT Solutions Provider specializing in cutting-edge
+              technology solutions that drive business growth and digital
+              transformation.
             </p>
 
             {/* Social Media */}
@@ -76,11 +95,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {company.map((item, index) => (
                 <li key={index}>
-                  <a 
+                  <a
                     href="#"
                     className="text-gray-400 hover:text-electric-blue transition-colors duration-300 flex items-center justify-center sm:justify-start group"
                   >
-                    <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+                    <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      →
+                    </span>
                     {item}
                   </a>
                 </li>
@@ -96,13 +117,19 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex justify-center sm:justify-start items-center space-x-3 text-gray-400">
                 <Mail className="w-5 h-5 text-electric-blue" />
-                <a href="mailto:support@yubhiantech.in" className="hover:text-white transition-colors duration-300">
+                <a
+                  href="mailto:support@yubhiantech.in"
+                  className="hover:text-white transition-colors duration-300"
+                >
                   support@yubhiantech.in
                 </a>
               </div>
               <div className="flex justify-center sm:justify-start items-center space-x-3 text-gray-400">
                 <Phone className="w-5 h-5 text-electric-blue" />
-                <a href="tel:+918500401091" className="hover:text-white transition-colors duration-300">
+                <a
+                  href="tel:+918500401091"
+                  className="hover:text-white transition-colors duration-300"
+                >
                   +91 8500401091
                 </a>
               </div>
@@ -118,7 +145,9 @@ const Footer = () => {
 
             {/* Newsletter */}
             <div className="space-y-4">
-              <p className="text-gray-400 text-sm">Subscribe to our newsletter for updates</p>
+              <p className="text-gray-400 text-sm">
+                Subscribe to our newsletter for updates
+              </p>
               <div className="flex flex-col sm:flex-row">
                 <input
                   type="email"
@@ -142,9 +171,24 @@ const Footer = () => {
               © 2024 Yubhian Technologies. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Privacy</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Terms</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Cookies</a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                Privacy
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                Terms
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                Cookies
+              </a>
             </div>
           </div>
         </div>
