@@ -57,7 +57,7 @@ const ContactSection = () => {
 
     try {
       const GOOGLE_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycby49GVs7mjUju04X4qzQ_zhI93z7a84gRDBRxi5BCQ5LuCe3rWAgVVGDmVKzvyelu_C/exec";
+        "https://script.google.com/macros/s/AKfycbzTrbQUTx7AavvJG3-53cN-_g-KTwrS4Hdk6uVLtycEiXF2BIQpwMIg7MsK91l0oA8V/exec";
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -116,8 +116,8 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "support@yubhiantech.in",
-      href: "mailto:support@yubhiantech.in",
+      content: "Info@yubhiantechnologies.in",
+      href: "mailto:Info@yubhiantechnologies.in",
     },
     {
       icon: MapPin,
