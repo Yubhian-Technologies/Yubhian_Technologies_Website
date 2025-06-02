@@ -121,10 +121,10 @@ const Footer = () => {
               <div className="flex justify-center sm:justify-start items-center space-x-3 text-gray-400">
                 <Mail className="w-5 h-5 text-electric-blue" />
                 <a
-                  href="mailto:support@yubhiantech.in"
+                  href="mailto:Info@yubhiantechnologies.in"
                   className="hover:text-white transition-colors duration-300"
                 >
-                  support@yubhiantech.in
+                  Info@yubhiantechnologies.in
                 </a>
               </div>
               <div className="flex justify-center sm:justify-start items-center space-x-3 text-gray-400">
