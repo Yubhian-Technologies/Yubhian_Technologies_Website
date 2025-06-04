@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Navigation from "./../components/Navigation";
-import Policies from "./../components/Policies";
-import Footer from "./../components/Footer";
+import Navigation from "../components/Navigation";
+import Policies from "../components/Policies";
+import Footer from "../components/Footer";
 
 function PrivacyPolicies() {
   useEffect(() => {

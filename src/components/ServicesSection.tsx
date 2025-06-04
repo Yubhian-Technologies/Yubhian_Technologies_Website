@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  Bot,
   Brain,
   Code,
   GraduationCap,
@@ -17,6 +18,15 @@ const ServicesSection = () => {
   const [isTouching, setIsTouching] = useState(false);
 
   const services = [
+    {
+      icon: Bot,
+      title: "AI Agents",
+      description:
+        "Autonomous AI agents designed to perform complex tasks, make decisions, and interact intelligently with users or systems in real time.",
+      gradient: "from-sky-500 to-indigo-600",
+      image:
+        "https://tse1.mm.bing.net/th/id/OIP.fCyUpyRHPoQGLuSMWj4qRgHaEw?rs=1&pid=ImgDetMain",
+    },
     {
       icon: Brain,
       title: "AI/ML Projects",
@@ -88,10 +98,11 @@ const ServicesSection = () => {
 
         // Get current scroll position and add scroll speed
         const currentScroll = container.scrollLeft + scrollSpeed;
-        
+
         // Reset to 0 when we've scrolled past the original set of cards
-        const newScrollPosition = currentScroll >= totalWidth ? 0 : currentScroll;
-        
+        const newScrollPosition =
+          currentScroll >= totalWidth ? 0 : currentScroll;
+
         container.scrollLeft = newScrollPosition;
       }
 
@@ -109,16 +120,16 @@ const ServicesSection = () => {
   const handleMouseEnter = () => {
     isPausedRef.current = true;
   };
-  
+
   const handleMouseLeave = () => {
     isPausedRef.current = false;
   };
-  
+
   const handleTouchStart = () => {
     setIsTouching(true);
     isPausedRef.current = true;
   };
-  
+
   const handleTouchEnd = () => {
     setIsTouching(false);
     isPausedRef.current = false;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Navigation from "./../components/Navigation";
-import Footer from "./../components/Footer";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 import Terms from "../components/Terms";
 
 function TermsCondiitions() {
