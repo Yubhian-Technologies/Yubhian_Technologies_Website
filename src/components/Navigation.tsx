@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,14 +33,14 @@ const Navigation = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const navigate = useNavigate();
+
   const handleGetInTouchClick = () => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+    // Navigate to the contact section smoothly using HashLink style
+    navigate("/#contact", { replace: false });
+
     setIsMobileMenuOpen(false);
   };
-
   const handleNavClick = (href) => {
     setIsMobileMenuOpen(false);
     const element = document.getElementById(href.replace("#", ""));
