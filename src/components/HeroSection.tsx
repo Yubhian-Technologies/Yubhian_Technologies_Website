@@ -80,7 +80,7 @@ const HeroSection = () => {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            Specializing in AI/ML, Web Development, Blockchain, and custom
+            Specializing in AI/ML, Web Development, AI-Agents, Blockchain, and custom
             solutions to drive your business growth and digital transformation.
           </p>
 
