@@ -8,12 +8,20 @@ import ProcessSection from "../components/ProcessSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
 import Testimonial from "@/components/Testmonial";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const location = useLocation();
 
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   return (
     <div className="min-h-screen bg-rich-black text-white overflow-x-hidden">
       <Navigation />
@@ -22,7 +30,7 @@ const Index = () => {
       <FeaturesSection />
       <AboutSection />
       <ProcessSection />
-      <Testimonial/>
+      <Testimonial />
       <ContactSection />
       <Footer />
     </div>

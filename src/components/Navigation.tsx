@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const smoothScroll = (el) => {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +73,11 @@ const Navigation = () => {
                 isScrolled ? "shadow-lg" : "shadow-2xl"
               }`}
             >
-              <img src="/logo_bg.png" alt="Logo" className="w-6 h-6 md:w-9 md:h-9" />
+              <img
+                src="/logo_bg.png"
+                alt="Logo"
+                className="w-6 h-6 md:w-9 md:h-9"
+              />
             </div>
 
             <div className="hidden xs:block">
@@ -84,13 +93,10 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navItems.map((item, index) => (
-              <a
+              <HashLink
                 key={item.name}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.href);
-                }}
+                scroll={smoothScroll}
+                to={`/${item.href}`}
                 className={`relative text-gray-300 hover:text-white transition-all duration-300 font-medium group cursor-pointer ${
                   isScrolled ? "text-sm lg:text-base" : "text-base lg:text-lg"
                 } ${
@@ -104,11 +110,11 @@ const Navigation = () => {
                     ? `slideInDown 0.6s ease-out ${0.2 + index * 0.1}s both`
                     : "none",
                 }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 blur-sm transition-all duration-300 group-hover:w-full opacity-50"></span>
-              </a>
+              </HashLink>
             ))}
           </div>
 
@@ -175,13 +181,11 @@ const Navigation = () => {
           <div className="relative max-w-md mx-auto pt-20 sm:pt-24 px-6 sm:px-8">
             <div className="space-y-4 sm:space-y-6">
               {navItems.map((item, index) => (
-                <a
+                <HashLink
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item.href);
-                  }}
+                  scroll={smoothScroll}
+                  to={`/${item.href}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`block text-xl sm:text-2xl md:text-3xl font-semibold text-white hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2 hover:scale-105 cursor-pointer ${
                     isMobileMenuOpen
                       ? "opacity-100 translate-y-0"
@@ -194,11 +198,8 @@ const Navigation = () => {
                       : "none",
                   }}
                 >
-                  <span className="relative">
-                    {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </a>
+                  {item.name}
+                </HashLink>
               ))}
 
               <div className="pt-6 sm:pt-8">
