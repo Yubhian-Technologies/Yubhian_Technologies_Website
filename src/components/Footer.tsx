@@ -10,6 +10,8 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 import ScrollToTopButton from "./ScrollToTopButton";
 
 const Footer = () => {
@@ -22,14 +24,16 @@ const Footer = () => {
     "Student Training Programs",
   ];
 
+  const smoothScroll = (el) => {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const company = [
-    "About Us",
-    "Our Process",
-    "Case Studies",
-    "Careers",
-    "Blog",
-    "Privacy Policy",
-    "Terms of Service",
+    { label: "About Us", href: "/#about" },
+    { label: "Our Process", href: "/#process" },
+    { label: "Services", href: "/#services" },
+    { label: "Products", href: "/#process" },
+    { label: "Privacy Policy", href: "/policies" },
+    { label: "Terms of Service", href: "/terms" },
   ];
 
   const socialLinks = [
@@ -96,19 +100,26 @@ const Footer = () => {
           <div className="space-y-6 text-center sm:text-left">
             <h4 className="text-lg font-semibold text-white">Company</h4>
             <ul className="space-y-3">
-              {company.map((item, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-electric-blue transition-colors duration-300 flex items-center justify-center sm:justify-start group"
-                  >
-                    <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      →
-                    </span>
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {company.map((item, index) => {
+                const isInternalHash = item.href.startsWith("/#");
+
+                const LinkComponent = isInternalHash ? HashLink : Link;
+
+                return (
+                  <li key={index}>
+                    <LinkComponent
+                      to={item.href}
+                      scroll={smoothScroll}
+                      className="text-gray-400 hover:text-electric-blue transition-colors duration-300 flex items-center justify-center sm:justify-start group"
+                    >
+                      <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        →
+                      </span>
+                      {item.label}
+                    </LinkComponent>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

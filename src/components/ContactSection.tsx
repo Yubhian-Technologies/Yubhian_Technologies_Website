@@ -122,7 +122,8 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: "Location",
-      content: "Yubhian Technologies HQ, Andhra Pradesh, India",
+      content:
+        "4th Floor, Koutilya complex, Maheshwari Chambars, near Irramanzil metro, towards Khairatabad pillar number 1144, somajiguda, Hyderabad, Telangana, India-500082",
       href: "#",
     },
     {

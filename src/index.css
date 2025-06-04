@@ -222,3 +222,6 @@ body::before {
     @apply px-6 py-3 text-sm;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
