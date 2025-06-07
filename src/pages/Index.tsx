@@ -9,6 +9,7 @@ import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
 import Testimonial from "@/components/Testmonial";
 import { useLocation } from "react-router-dom";
+import Careers from "../components/Careers";
 
 const Index = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const Index = () => {
       <Testimonial />
       <ContactSection />
       <Footer />
+      <Careers/>
     </div>
   );
 };
