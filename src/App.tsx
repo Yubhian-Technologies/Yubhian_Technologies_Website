@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TermsCondiitions from "./pages/TermsConditions";
 import PrivacyPolicies from "./pages/PrivacyPolicies";
+import CareersPage from "./pages/Careers_Page";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
           <Route path="/terms" element={<TermsCondiitions />} />
           <Route path="/policies" element={<PrivacyPolicies />} />
+          <Route path="/careers" element={<CareersPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -30,6 +30,7 @@ const Navigation = () => {
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
     { name: "Products", href: "#process" },
+    { name: "Careers", href: "careers" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -97,7 +98,9 @@ const Navigation = () => {
               <HashLink
                 key={item.name}
                 scroll={smoothScroll}
-                to={`/${item.href}`}
+                to={
+                  item.href.startsWith("#") ? `/${item.href}` : `/${item.href}`
+                }
                 className={`relative text-gray-300 hover:text-white transition-all duration-300 font-medium group cursor-pointer ${
                   isScrolled ? "text-sm lg:text-base" : "text-base lg:text-lg"
                 } ${
@@ -185,7 +188,11 @@ const Navigation = () => {
                 <HashLink
                   key={item.name}
                   scroll={smoothScroll}
-                  to={`/${item.href}`}
+                  to={
+                    item.href.startsWith("#")
+                      ? `/${item.href}`
+                      : `/${item.href}`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block text-xl sm:text-2xl md:text-3xl font-semibold text-white hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2 hover:scale-105 cursor-pointer ${
                     isMobileMenuOpen
