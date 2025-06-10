@@ -222,7 +222,7 @@ const Navigation = () => {
 
               <div className="pt-6 sm:pt-8">
                 <button
-                  onClick={handleGetInTouchClick}
+                  onClick={handleWhatsAppChat}
                   className={`w-full py-3 sm:py-4 px-6 sm:px-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-base sm:text-lg ${
                     isMobileMenuOpen
                       ? "opacity-100 translate-y-0"
