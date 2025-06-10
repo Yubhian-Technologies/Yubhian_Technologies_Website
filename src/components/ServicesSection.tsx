@@ -7,6 +7,7 @@ import {
   Link2,
   Server,
   TrendingUp,
+  ChevronRight, // Import ChevronRight
 } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -16,6 +17,8 @@ const ServicesSection = () => {
   const scrollAnimationRef = useRef<number>();
   const isPausedRef = useRef(false);
   const [isTouching, setIsTouching] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true); // State for indicator visibility
 
   const services = [
     {
@@ -84,8 +87,27 @@ const ServicesSection = () => {
   ];
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Assuming 768px as the breakpoint for mobile
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+
+    if (!container || isMobile) {
+      if (scrollAnimationRef.current) {
+        cancelAnimationFrame(scrollAnimationRef.current);
+      }
+      return;
+    }
 
     const scrollSpeed = 0.5;
 
@@ -96,10 +118,8 @@ const ServicesSection = () => {
         const totalCardWidth = cardWidth + gap;
         const totalWidth = services.length * totalCardWidth;
 
-        // Get current scroll position and add scroll speed
         const currentScroll = container.scrollLeft + scrollSpeed;
 
-        // Reset to 0 when we've scrolled past the original set of cards
         const newScrollPosition =
           currentScroll >= totalWidth ? 0 : currentScroll;
 
@@ -115,19 +135,42 @@ const ServicesSection = () => {
       if (scrollAnimationRef.current)
         cancelAnimationFrame(scrollAnimationRef.current);
     };
-  }, [services.length]);
+  }, [services.length, isMobile]);
+
+  // Hide scroll indicator after first touch/scroll on mobile
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || !isMobile) return;
+
+    const handleScroll = () => {
+      if (container.scrollLeft > 0) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, [isMobile]);
 
   const handleMouseEnter = () => {
-    isPausedRef.current = true;
+    if (!isMobile) {
+      isPausedRef.current = true;
+    }
   };
 
   const handleMouseLeave = () => {
-    isPausedRef.current = false;
+    if (!isMobile) {
+      isPausedRef.current = false;
+    }
   };
 
   const handleTouchStart = () => {
     setIsTouching(true);
     isPausedRef.current = true;
+    // Hide indicator on touch start
   };
 
   const handleTouchEnd = () => {
@@ -170,53 +213,85 @@ const ServicesSection = () => {
             ref={scrollContainerRef}
             className="flex gap-8 overflow-x-scroll -mx-8 scrollbar-hide py-4 px-1 sm:px-8"
           >
-            {[...services, ...services].map((service, index) => {
-              const IconComponent = service.icon;
-              const originalIndex = index % services.length;
-              return (
-                <div
-                  key={index}
-                  className={`card group relative rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer flex-shrink-0 w-[80vw] sm:w-80 md:w-96 overflow-hidden ${
-                    isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-8"
-                  }`}
-                  style={{
-                    transitionDelay: isVisible
-                      ? `${originalIndex * 0.1}s`
-                      : "0s",
-                  }}
-                >
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute top-4 left-4 w-12 h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                  <div className="p-6 sm:p-8">
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-electric-blue transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-400 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="text-electric-blue font-semibold text-sm hover:text-brand-violet transition-colors duration-300">
-                        Learn More →
-                      </button>
-                    </div>
-                  </div>
+            {(isMobile ? services : [...services, ...services]).map(
+              (service, index) => {
+                const IconComponent = service.icon;
+                const originalIndex = index % services.length;
+
+                const mobileMarginClasses = isMobile
+                  ? `
+                      ${index === 0 ? "ml-8" : ""}
+                      ${index === services.length - 1 ? "mr-8" : ""}
+                    `
+                  : "";
+
+                return (
                   <div
-                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10`}
+                    key={index}
+                    className={`card group relative rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer flex-shrink-0 w-[80vw] sm:w-80 md:w-96 overflow-hidden ${
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-8"
+                    } ${mobileMarginClasses}`}
+                    style={{
+                      transitionDelay: isVisible
+                        ? `${originalIndex * 0.1}s`
+                        : "0s",
+                    }}
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute top-4 left-4 w-12 h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <div className="p-6 sm:p-8">
+                      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-electric-blue transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed mb-6">
+                        {service.description}
+                      </p>
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button className="text-electric-blue font-semibold text-sm hover:text-brand-violet transition-colors duration-300"></button>
+                      </div>
+                    </div>
+                    <div
+                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10`}
+                    />
+                  </div>
+                );
+              }
+            )}
+          </div>
+          {/* Scroll Indicator for Mobiles */}
+          {showScrollIndicator && isMobile && (
+            <div className="flex justify-center mt-6 lg:hidden">
+              <div className="flex items-center space-x-2 bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 animate-pulse">
+                <span className="text-white text-sm font-medium">
+                  Swipe to explore
+                </span>
+                <div className="flex space-x-1">
+                  <ChevronRight
+                    className="w-4 h-4 text-electric-blue animate-bounce"
+                    style={{ animationDelay: "0s" }}
+                  />
+                  <ChevronRight
+                    className="w-4 h-4 text-electric-blue animate-bounce"
+                    style={{ animationDelay: "0.2s" }}
+                  />
+                  <ChevronRight
+                    className="w-4 h-4 text-electric-blue animate-bounce"
+                    style={{ animationDelay: "0.4s" }}
                   />
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 import HeroSection from "../components/HeroSection";
 import ServicesSection from "../components/ServicesSection";
@@ -13,6 +13,17 @@ import Careers from "../components/Careers";
 
 const Index = () => {
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const loadTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500); // Show loader for 1.5 seconds
+
+    return () => clearTimeout(loadTimer);
+  }, []);
 
   useEffect(() => {
     if (location.hash) {
@@ -23,18 +34,34 @@ const Index = () => {
       }
     }
   }, [location]);
+
   return (
     <div className="min-h-screen bg-rich-black text-white overflow-x-hidden">
-      <Navigation />
-      <HeroSection />
-      <ServicesSection />
-      <FeaturesSection />
-      <AboutSection />
-      <ProcessSection />
-      <Testimonial />
-      <ContactSection />
-      <Footer />
-      <Careers/>
+      {isLoading ? (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-950 z-[999] transition-opacity duration-500 opacity-100">
+          <div className="relative flex items-center justify-center">
+            {/* Replace the old spinner div with the new custom class */}
+            <div className="gradient-spinner"></div> {/* Use your custom class */}
+            <img
+              src="/logo_bg.png" // Your logo
+              alt="Loading Logo"
+              className="absolute w-12 h-12 animate-pulse z-3" /* Ensure logo is on top */
+            />
+          </div>
+        </div>
+      ) : (
+        <>
+          <Navigation />
+          <HeroSection />
+          <ServicesSection />
+          <FeaturesSection />
+          <AboutSection />
+          <ProcessSection />
+          <Testimonial />
+          <ContactSection />
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

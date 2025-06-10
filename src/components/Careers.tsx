@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; // Make sure to import useState and useRef
+import React, { useState, useRef } from "react";
 import {
   GraduationCap,
   Code,
@@ -15,8 +15,10 @@ import {
   CheckCircle,
   AlertCircle,
   X,
-} from "lucide-react"; // Assuming you have lucide-react for icons
-import axios from "axios"; // Import axios
+  Loader, // Import Loader icon
+} from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 const careerCards = [
   {
@@ -55,7 +57,7 @@ const careerCards = [
 
 const Careers = () => {
   const careersRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false); // You need to manage isVisible state, possibly using an IntersectionObserver
+  const [isVisible, setIsVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -70,9 +72,10 @@ const Careers = () => {
     resume: null, // Will store the File object
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  // Placeholder for Intersection Observer logic (you might already have this)
+  // Intersection Observer logic for fade-in effect
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -116,26 +119,73 @@ const Careers = () => {
     }
   };
 
+  // Resets all form data and closes the modal completely
+  const resetFormAndCloseModal = () => {
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      location: "",
+      experience: "",
+      college: "",
+      graduation: "",
+      skills: "",
+      portfolio: "",
+      resume: null,
+    });
+    setSubmitStatus(null); // Clear any submission status
+    setSelectedCard(null); // Close the modal
+  };
+
+  // Function to handle "Try Again" to reset and reopen the form
+  const handleTryAgain = () => {
+    const currentCardId = selectedCard; // Store the ID of the current card
+
+    // 1. Reset form data and submission status
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      location: "",
+      experience: "",
+      college: "",
+      graduation: "",
+      skills: "",
+      portfolio: "",
+      resume: null,
+    });
+    setSubmitStatus(null); // Clear error message
+    setIsSubmitting(false); // Ensure not in submitting state
+
+    // 2. Close the modal first
+    setSelectedCard(null);
+
+    // 3. Re-open the modal after a short delay to ensure unmount/remount
+    
+    setTimeout(() => {
+      setSelectedCard(currentCardId);
+    }, 50); // A small delay, e.g., 50ms, is usually sufficient
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus(null);
+    setSubmitStatus(null); // Clear previous status before new submission
 
     const GOOGLE_APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwKyuW3OFkbKga5iEt-oik_lJI7dQKs-pbjZJXhwmq_jdC3DXDh1cV9Gga2Tgumkkdi/exec"; // Paste your Apps Script Web app URL here
+      "https://script.google.com/macros/s/AKfycbwKyuW3OFkbKga5iEt-oik_lJI7dQKs-pbjZJXhwmq_jdC3DXDh1cV9Gga2Tgumkkdi/exec";
 
     try {
       let resumeBase64 = null;
       let resumeFileName = null;
 
       if (formData.resume) {
-        // Read resume file as Base64
         const reader = new FileReader();
         reader.readAsDataURL(formData.resume);
 
         await new Promise((resolve, reject) => {
           reader.onload = () => {
-            // Extract base64 part (remove data:application/pdf;base64,)
             if (typeof reader.result === "string") {
               resumeBase64 = reader.result.split(",")[1];
               resumeFileName = formData.resume.name;
@@ -168,53 +218,25 @@ const Careers = () => {
       const responseData = response.data;
       if (responseData.status === "success") {
         setSubmitStatus("success");
-        // Optionally, if you want to store the resume URL returned by Apps Script:
-        // console.log("Resume uploaded to:", responseData.resumeUrl);
+        // Use a timeout to display success message before redirecting
+        setTimeout(() => {
+          resetFormAndCloseModal(); // Reset form and close modal
+          navigate("/"); // Redirect to home page
+        }, 3000); // Show success message for 3 seconds
       } else {
         setSubmitStatus("error");
         console.error("Apps Script Error:", responseData.message);
       }
-
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        location: "",
-        experience: "",
-        college: "",
-        graduation: "",
-        skills: "",
-        portfolio: "",
-        resume: null,
-      });
-
-      setTimeout(() => {
-        setSelectedCard(null);
-        setSubmitStatus(null);
-      }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
       setSubmitStatus("error");
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Always reset submitting state
     }
   };
 
   const closeModal = () => {
-    setSelectedCard(null);
-    setSubmitStatus(null);
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      location: "",
-      experience: "",
-      college: "",
-      graduation: "",
-      skills: "",
-      portfolio: "",
-      resume: null,
-    });
+    resetFormAndCloseModal();
   };
 
   const currentCard = careerCards.find((card) => card.id === selectedCard);
@@ -224,7 +246,7 @@ const Careers = () => {
       <section
         ref={careersRef}
         id="careers"
-        className="bg-black min-h-screen py-8 sm:py-12 lg:py-20"
+        className="bg-black min-h-screen py-12 lg:py-20"
       >
         <div className="max-w-7xl md:pt-20 pt-10 mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -319,19 +341,6 @@ const Careers = () => {
                     {card.description}
                   </p>
 
-                  <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                    {card.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-start space-x-3">
-                        <div
-                          className={`w-2 h-2 sm:w-2.5 sm:h-2.5 bg-gradient-to-r ${card.color} rounded-full mt-2.5 flex-shrink-0`}
-                        ></div>
-                        <span className="text-sm sm:text-base text-gray-400 leading-relaxed">
-                          {highlight}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
                   <button
                     className={`w-full py-3 sm:py-4 px-6 sm:px-8 bg-gradient-to-r ${card.color} text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-base sm:text-lg`}
                   >
@@ -410,237 +419,252 @@ const Careers = () => {
                 <p className="text-gray-400 mt-1">{currentCard?.subtitle}</p>
               </div>
               <button
-                onClick={closeModal}
+                onClick={closeModal} // This button always closes the modal and resets everything
                 className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors"
               >
                 <X className="w-5 h-5 text-gray-400" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
-              {submitStatus === "success" && (
-                <div className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <p className="text-green-400 font-medium">
-                    Application submitted successfully! We'll get back to you
-                    soon.
-                  </p>
-                </div>
-              )}
-
-              {submitStatus === "error" && (
-                <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 flex items-center space-x-3">
-                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                  <p className="text-red-400 font-medium">
-                    Something went wrong. Please try again.
-                  </p>
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-white font-medium flex items-center space-x-2">
-                    <User className="w-4 h-4" />
-                    <span>Full Name *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-white font-medium flex items-center space-x-2">
-                    <Mail className="w-4 h-4" />
-                    <span>Email *</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                    placeholder="Enter your email"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-white font-medium flex items-center space-x-2">
-                    <Phone className="w-4 h-4" />
-                    <span>Phone Number *</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-white font-medium flex items-center space-x-2">
-                    <MapPin className="w-4 h-4" />
-                    <span>Location *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                    placeholder="City, State"
-                  />
-                </div>
+            {isSubmitting ? (
+              // Loading state
+              <div className="p-10 flex flex-col items-center justify-center text-white">
+                <Loader className="w-12 h-12 animate-spin text-blue-400" />
+                <p className="mt-4 text-lg">Submitting your application...</p>
               </div>
-
-              {selectedCard === "sde" && (
-                <div className="space-y-2">
-                  <label className="text-white font-medium">Experience *</label>
-                  <select
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                  >
-                    <option value="">Select experience level</option>
-                    <option value="0-1">0-1 years</option>
-                    <option value="1-3">1-3 years</option>
-                    <option value="3-5">3-5 years</option>
-                    <option value="5+">5+ years</option>
-                  </select>
-                </div>
-              )}
-
-              {selectedCard === "internship" && (
+            ) : submitStatus === "success" ? (
+              // Success state
+              <div className="p-10 flex flex-col items-center justify-center text-white">
+                <CheckCircle className="w-16 h-16 text-green-500" />
+                <h3 className="mt-4 text-2xl font-bold">Application Submitted!</h3>
+                <p className="mt-2 text-gray-400 text-center">
+                  We've received your application and will get back to you soon.
+                  Redirecting to home page...
+                </p>
+              </div>
+            ) : submitStatus === "error" ? (
+              // Error state
+              <div className="p-10 flex flex-col items-center justify-center text-white">
+                <AlertCircle className="w-16 h-16 text-red-500" />
+                <h3 className="mt-4 text-2xl font-bold">Submission Failed!</h3>
+                <p className="mt-2 text-gray-400 text-center">
+                  Something went wrong while submitting your application. Please try again.
+                </p>
+                <button
+                  onClick={handleTryAgain} // Call new function to close and re-open form
+                  className="mt-6 py-3 px-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : (
+              // Default form display
+              <form onSubmit={handleSubmit} className="p-6 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-white font-medium flex items-center space-x-2">
-                      <GraduationCap className="w-4 h-4" />
-                      <span>College/University *</span>
+                      <User className="w-4 h-4" />
+                      <span>Full Name *</span>
                     </label>
                     <input
                       type="text"
-                      name="college"
-                      value={formData.college}
+                      name="fullName"
+                      value={formData.fullName}
                       onChange={handleInputChange}
                       required
                       className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                      placeholder="Enter your college name"
+                      placeholder="Enter your full name"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-white font-medium">
-                      Graduation Year *
+                    <label className="text-white font-medium flex items-center space-x-2">
+                      <Mail className="w-4 h-4" />
+                      <span>Email *</span>
                     </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-white font-medium flex items-center space-x-2">
+                      <Phone className="w-4 h-4" />
+                      <span>Phone Number *</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-white font-medium flex items-center space-x-2">
+                      <MapPin className="w-4 h-4" />
+                      <span>Location *</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                      placeholder="City, State"
+                    />
+                  </div>
+                </div>
+
+                {selectedCard === "sde" && (
+                  <div className="space-y-2">
+                    <label className="text-white font-medium">Experience *</label>
                     <select
-                      name="graduation"
-                      value={formData.graduation}
+                      name="experience"
+                      value={formData.experience}
                       onChange={handleInputChange}
                       required
                       className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
                     >
-                      <option value="">Select year</option>
-                      <option value="2024">2024</option>
-                      <option value="2025">2025</option>
-                      <option value="2026">2026</option>
-                      <option value="2027">2027</option>
+                      <option value="">Select experience level</option>
+                      <option value="0-1">0-1 years</option>
+                      <option value="1-3">1-3 years</option>
+                      <option value="3-5">3-5 years</option>
+                      <option value="5+">5+ years</option>
                     </select>
                   </div>
-                </div>
-              )}
-
-              <div className="space-y-2">
-                <label className="text-white font-medium">
-                  Skills & Technologies *
-                </label>
-                <textarea
-                  name="skills"
-                  value={formData.skills}
-                  onChange={handleInputChange}
-                  required
-                  rows={3}
-                  className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors resize-none"
-                  placeholder="List your technical skills (e.g., React, Node.js, Python, etc.)"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-white font-medium">
-                  Portfolio/GitHub URL
-                </label>
-                <input
-                  type="url"
-                  name="portfolio"
-                  value={formData.portfolio}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
-                  placeholder="https://github.com/username or portfolio URL"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-white font-medium flex items-center space-x-2">
-                  <FileText className="w-4 h-4" />
-                  <span>Resume (PDF only) *</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={handleFileChange}
-                    required
-                    className="hidden"
-                    id="resume-upload"
-                  />
-                  <label
-                    htmlFor="resume-upload"
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-gray-400 cursor-pointer hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <Upload className="w-5 h-5" />
-                    <span>
-                      {formData.resume
-                        ? formData.resume.name
-                        : "Click to upload resume"}
-                    </span>
-                  </label>
-                </div>
-                {formData.resume && (
-                  <p className="text-green-400 text-sm flex items-center space-x-2">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>Resume uploaded successfully</span>
-                  </p>
                 )}
-              </div>
 
-              <div className="flex space-x-4 pt-6">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="flex-1 py-3 px-6 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex-1 py-3 px-6 bg-gradient-to-r from-blue-400 to-violet-400 hover:from-blue-500 hover:to-violet-500 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
-                </button>
-              </div>
-            </form>
+                {selectedCard === "internship" && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-white font-medium flex items-center space-x-2">
+                        <GraduationCap className="w-4 h-4" />
+                        <span>College/University *</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="college"
+                        value={formData.college}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                        placeholder="Enter your college name"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-white font-medium">
+                        Graduation Year *
+                      </label>
+                      <select
+                        name="graduation"
+                        value={formData.graduation}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                      >
+                        <option value="">Select year</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <label className="text-white font-medium">
+                    Skills & Technologies *
+                  </label>
+                  <textarea
+                    name="skills"
+                    value={formData.skills}
+                    onChange={handleInputChange}
+                    required
+                    rows={3}
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors resize-none"
+                    placeholder="List your technical skills (e.g., React, Node.js, Python, etc.)"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-white font-medium">
+                    Portfolio/GitHub URL
+                  </label>
+                  <input
+                    type="url"
+                    name="portfolio"
+                    value={formData.portfolio}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors"
+                    placeholder="https://github.com/username or portfolio URL"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-white font-medium flex items-center space-x-2">
+                    <FileText className="w-4 h-4" />
+                    <span>Resume (PDF only) *</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFileChange}
+                      required
+                      className="hidden"
+                      id="resume-upload"
+                    />
+                    <label
+                      htmlFor="resume-upload"
+                      className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-gray-400 cursor-pointer hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <Upload className="w-5 h-5" />
+                      <span>
+                        {formData.resume
+                          ? formData.resume.name
+                          : "Click to upload resume"}
+                      </span>
+                    </label>
+                  </div>
+                  {formData.resume && (
+                    <p className="text-green-400 text-sm flex items-center space-x-2">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Resume uploaded successfully</span>
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex space-x-4 pt-6">
+                  <button
+                    type="button"
+                    onClick={closeModal} // This button always closes the modal and resets
+                    className="flex-1 py-3 px-6 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting} // Correctly disables if loading
+                    className="flex-1 py-3 px-6 bg-gradient-to-r from-blue-400 to-violet-400 hover:from-blue-500 hover:to-violet-500 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Submit Application
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}

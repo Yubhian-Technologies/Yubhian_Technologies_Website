@@ -36,6 +36,16 @@ const Navigation = () => {
 
   const navigate = useNavigate();
 
+  const handleWhatsAppChat = () => {
+    const phoneNumber = "919989494236"; // Indian country code + mobile number
+    const message = "Hello, I'd like to get in touch about your services.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank"); // Open in a new tab
+    setIsMobileMenuOpen(false); // Close mobile menu if open
+  };
+
   const handleGetInTouchClick = () => {
     // Navigate to the contact section smoothly using HashLink style
     navigate("/#contact", { replace: false });
@@ -125,7 +135,7 @@ const Navigation = () => {
           {/* CTA Button & Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button
-              onClick={handleGetInTouchClick}
+              onClick={handleWhatsAppChat}
               className={`hidden sm:inline-flex items-center justify-center px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group ${
                 isScrolled ? "text-xs sm:text-sm" : "text-sm sm:text-base"
               } ${
