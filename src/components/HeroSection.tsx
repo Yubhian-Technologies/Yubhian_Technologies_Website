@@ -9,7 +9,7 @@ const HeroSection = () => {
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden mt-20 md:mt-16"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 md:pt-16"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
