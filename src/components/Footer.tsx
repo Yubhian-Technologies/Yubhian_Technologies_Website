@@ -44,8 +44,8 @@ const Footer = () => {
       href: "https://www.linkedin.com/company/yubhian-technologies/posts/?feedView=all",
       name: "LinkedIn",
     },
-    { icon: Twitter, href: "#", name: "Twitter" },
-    { icon: Instagram, href: "#", name: "Instagram" },
+    // { icon: Twitter, href: "#", name: "Twitter" },
+    { icon: Instagram, href: "https://www.instagram.com/yubhian_technologies/profilecard/?igsh=MWp2YmdiYmtjN2NlbQ==", name: "Instagram" },
   ];
 
   return (
@@ -156,7 +156,7 @@ const Footer = () => {
             </div>
 
             {/* Newsletter */}
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <p className="text-gray-400 text-sm">
                 Subscribe to our newsletter for updates
               </p>
@@ -170,7 +170,7 @@ const Footer = () => {
                   Subscribe
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
