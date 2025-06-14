@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion, useInView, useAnimation } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useAnimation,
+} from "framer-motion";
 import testimonials from "../assets/testimonials.json";
 
 const SLIDE_INTERVAL = 2500;
@@ -160,7 +165,7 @@ const Testimonial = () => {
                         <p className="text-blue-400 text-lg">{t.title}</p>
                       </div>
                     </div>
-                    <div className="flex gap-1 mb-5">
+                    {/* <div className="flex gap-1 mb-5">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
@@ -171,7 +176,7 @@ const Testimonial = () => {
                           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                         </svg>
                       ))}
-                    </div>
+                    </div> */}
                     <blockquote className="text-gray-300 text-lg sm:text-xl lg:text-2xl leading-relaxed italic">
                       "{t.text}"
                     </blockquote>

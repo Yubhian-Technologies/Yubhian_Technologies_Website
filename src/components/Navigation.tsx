@@ -37,17 +37,16 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const handleWhatsAppChat = () => {
-    const phoneNumber = "919989494236"; // Indian country code + mobile number
+    const phoneNumber = "+918500401091";
     const message = "Hello, I'd like to get in touch about your services.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
-    window.open(whatsappUrl, "_blank"); // Open in a new tab
-    setIsMobileMenuOpen(false); // Close mobile menu if open
+    window.open(whatsappUrl, "_blank");
+    setIsMobileMenuOpen(false);
   };
 
   const handleGetInTouchClick = () => {
-    // Navigate to the contact section smoothly using HashLink style
     navigate("/#contact", { replace: false });
 
     setIsMobileMenuOpen(false);
