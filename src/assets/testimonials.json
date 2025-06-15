@@ -1,23 +1,30 @@
 [
   {
-    "name": "Bradley Gordon",
-    "title": "CEO & Founder, Archin Studio",
+    "name": "Naga Pavan",
+    "title": "Data Analyst, Deloitte",
     "avatar": "/1.png",
-    "text": "A studio with passionate, professional and full creativity. Much more than I'm expect. Great services, high quality products & affordable prices. I'm extremely satisfied!",
-    "rating": 1.0
+    "text": "Yubhian understands how to turn raw data into meaningful action. Their insights made decision-making smoother and faster. For a data person like me, that’s gold.",
+    "rating": 5.0
   },
   {
-    "name": "Michael Chen",
-    "title": "Product Manager, InnovateX",
+    "name": "Mahendra",
+    "title": "SDE, Accenture",
     "avatar": "/2.png",
-    "text": "Professional, creative, and always on time. They went above and beyond to understand our needs and deliver exactly what we envisioned. The communication was seamless, and their attention to detail really stood out.",
+    "text": "Clean code. Fast delivery. Real impact. Yubhian works like a solid dev team that just gets things done without the fluff.",
+    "rating": 5.0
+  },
+  {
+    "name": "Akhil",
+    "title": "Backend Developer, Avirasoft Digital",
+    "avatar": "/3.png",
+    "text": "I’ve rarely seen a team that values backend structure like Yubhian. Everything they build is solid under the hood – just how developers like it.",
     "rating": 4.5
   },
   {
-    "name": "Liam Smith",
-    "title": "CTO, TechBridge",
-    "avatar": "/3.png",
-    "text": "Outstanding service and support. The team is knowledgeable and very responsive. They brought fresh ideas to the table and helped us improve our project significantly.",
-    "rating": 3.5
+    "name": "Jithendra",
+    "title": "Operations Analyst, NxtWave",
+    "avatar": "/4.png",
+    "text": "Processes, people, and performance – Yubhian nails all three. They’re not just building tech, they’re building reliable systems that scale.",
+    "rating": 4.5
   }
 ]
