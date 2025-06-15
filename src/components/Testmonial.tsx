@@ -153,11 +153,11 @@ const Testimonial = () => {
                     className="absolute inset-0 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl"
                   >
                     <div className="flex items-center gap-6 mb-6">
-                      <img
+                      {/* <img
                         src={t.avatar}
                         alt={t.name}
                         className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-4 border-blue-500/30 shadow-lg"
-                      />
+                      /> */}
                       <div>
                         <h3 className="text-white text-2xl lg:text-3xl font-bold">
                           {t.name}

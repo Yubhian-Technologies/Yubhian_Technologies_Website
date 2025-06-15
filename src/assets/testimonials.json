@@ -3,23 +3,21 @@
     "name": "Bradley Gordon",
     "title": "CEO & Founder, Archin Studio",
     "avatar": "/1.png",
-    "text": "A studio with passionate, professional and full creativity. Much more than I'm expect. Great services, high quality products & affordable prices. I'm extremely satisfied!.",
+    "text": "A studio with passionate, professional and full creativity. Much more than I'm expect. Great services, high quality products & affordable prices. I'm extremely satisfied!",
     "rating": 1.0
   },
-
   {
     "name": "Michael Chen",
     "title": "Product Manager, InnovateX",
     "avatar": "/2.png",
-    "text": "Professional, creative, and always on time. We loved working with them and will do so again!",
+    "text": "Professional, creative, and always on time. They went above and beyond to understand our needs and deliver exactly what we envisioned. The communication was seamless, and their attention to detail really stood out.",
     "rating": 4.5
   },
-
   {
     "name": "Liam Smith",
     "title": "CTO, TechBridge",
     "avatar": "/3.png",
-    "text": "Outstanding service and support. The team is knowledgeable and very responsive.",
+    "text": "Outstanding service and support. The team is knowledgeable and very responsive. They brought fresh ideas to the table and helped us improve our project significantly.",
     "rating": 3.5
   }
 ]
