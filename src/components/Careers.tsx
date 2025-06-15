@@ -15,7 +15,7 @@ import {
   CheckCircle,
   AlertCircle,
   X,
-  Loader, // Import Loader icon
+  Loader,
 } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
@@ -160,19 +160,18 @@ const Careers = () => {
     // 2. Close the modal first
     setSelectedCard(null);
 
-    // 3. Re-open the modal after a short delay to ensure unmount/remount
-    
+    // 3. Re-open the modal after a slight delay to ensure full reset
     setTimeout(() => {
       setSelectedCard(currentCardId);
     }, 50); // A small delay, e.g., 50ms, is usually sufficient
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null); // Clear previous status before new submission
 
+    // Replace with your actual Google Apps Script Web App URL
     const GOOGLE_APPS_SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbwKyuW3OFkbKga5iEt-oik_lJI7dQKs-pbjZJXhwmq_jdC3DXDh1cV9Gga2Tgumkkdi/exec";
 
@@ -341,6 +340,25 @@ const Careers = () => {
                     {card.description}
                   </p>
 
+                  {/* Highlights section with custom colored bullet points */}
+                  <div className="mb-6 sm:mb-8">
+                    <h4 className="text-lg font-semibold text-white mb-3">
+                      Highlights:
+                    </h4>
+                    <ul className="list-none text-gray-300 space-y-1">
+                      {card.highlights.map((highlight, hIndex) => (
+                        <li key={hIndex} className="relative pl-6">
+                          <span
+                            className={`absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gradient-to-r ${card.color}`}
+                          ></span>
+                          <span className="text-base sm:text-lg">
+                            {highlight}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
                   <button
                     className={`w-full py-3 sm:py-4 px-6 sm:px-8 bg-gradient-to-r ${card.color} text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-base sm:text-lg`}
                   >
@@ -419,7 +437,7 @@ const Careers = () => {
                 <p className="text-gray-400 mt-1">{currentCard?.subtitle}</p>
               </div>
               <button
-                onClick={closeModal} // This button always closes the modal and resets everything
+                onClick={closeModal}
                 className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors"
               >
                 <X className="w-5 h-5 text-gray-400" />
@@ -436,7 +454,9 @@ const Careers = () => {
               // Success state
               <div className="p-10 flex flex-col items-center justify-center text-white">
                 <CheckCircle className="w-16 h-16 text-green-500" />
-                <h3 className="mt-4 text-2xl font-bold">Application Submitted!</h3>
+                <h3 className="mt-4 text-2xl font-bold">
+                  Application Submitted!
+                </h3>
                 <p className="mt-2 text-gray-400 text-center">
                   We've received your application and will get back to you soon.
                   Redirecting to home page...
@@ -448,10 +468,11 @@ const Careers = () => {
                 <AlertCircle className="w-16 h-16 text-red-500" />
                 <h3 className="mt-4 text-2xl font-bold">Submission Failed!</h3>
                 <p className="mt-2 text-gray-400 text-center">
-                  Something went wrong while submitting your application. Please try again.
+                  Something went wrong while submitting your application. Please
+                  try again.
                 </p>
                 <button
-                  onClick={handleTryAgain} // Call new function to close and re-open form
+                  onClick={handleTryAgain}
                   className="mt-6 py-3 px-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
                 >
                   Try Again
@@ -528,7 +549,9 @@ const Careers = () => {
 
                 {selectedCard === "sde" && (
                   <div className="space-y-2">
-                    <label className="text-white font-medium">Experience *</label>
+                    <label className="text-white font-medium">
+                      Experience *
+                    </label>
                     <select
                       name="experience"
                       value={formData.experience}
@@ -650,14 +673,14 @@ const Careers = () => {
                 <div className="flex space-x-4 pt-6">
                   <button
                     type="button"
-                    onClick={closeModal} // This button always closes the modal and resets
+                    onClick={closeModal}
                     className="flex-1 py-3 px-6 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    disabled={isSubmitting} // Correctly disables if loading
+                    disabled={isSubmitting}
                     className="flex-1 py-3 px-6 bg-gradient-to-r from-blue-400 to-violet-400 hover:from-blue-500 hover:to-violet-500 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Submit Application
