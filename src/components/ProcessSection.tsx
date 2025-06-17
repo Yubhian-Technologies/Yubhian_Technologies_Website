@@ -174,7 +174,7 @@ const ProcessSection = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-rich-black/50"
+      className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-rich-black/50"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
@@ -183,7 +183,7 @@ const ProcessSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold mb-4 sm:mb-6">
             <span className="text-white">Our Work</span>
             <br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">

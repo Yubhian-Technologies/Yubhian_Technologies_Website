@@ -29,7 +29,7 @@ const Navigation = () => {
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
-    { name: "Products", href: "#process" },
+    { name: "Products", href: "*" },
     { name: "Careers", href: "careers" },
     { name: "Contact", href: "#contact" },
   ];
@@ -92,7 +92,7 @@ const Navigation = () => {
             </div>
 
             <div className="hidden xs:block">
-              <h1 className="font-bold text-white transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl">
+              <h1 className="font-bold text-white transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-lg">
                 Yubhian Technologies
               </h1>
               <p className="text-xs sm:text-xs md:text-sm text-gray-400 -mt-0.5 sm:-mt-1 transition-all duration-300">
@@ -111,7 +111,7 @@ const Navigation = () => {
                   item.href.startsWith("#") ? `/${item.href}` : `/${item.href}`
                 }
                 className={`relative text-gray-300 hover:text-white transition-all duration-300 font-medium group cursor-pointer ${
-                  isScrolled ? "text-sm lg:text-base" : "text-base lg:text-lg"
+                  isScrolled ? "text-sm lg:text-base" : "text-base lg:text-md"
                 } ${
                   isLoaded
                     ? "opacity-100 translate-y-0"
@@ -135,7 +135,7 @@ const Navigation = () => {
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={handleWhatsAppChat}
-              className={`hidden sm:inline-flex items-center justify-center px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group ${
+              className={`hidden sm:inline-flex items-center justify-center px-3 sm:px-4 md:px-4 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group ${
                 isScrolled ? "text-xs sm:text-sm" : "text-sm sm:text-base"
               } ${
                 isLoaded
@@ -144,7 +144,7 @@ const Navigation = () => {
               }`}
               style={{ transitionDelay: "600ms" }}
             >
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+              <span className="transition-transform text-sm duration-300 group-hover:translate-x-0.5">
                 Get in Touch
               </span>
             </button>
