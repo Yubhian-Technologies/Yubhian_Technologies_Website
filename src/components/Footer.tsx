@@ -32,8 +32,8 @@ const Footer = () => {
     { label: "About Us", href: "/#about" },
     { label: "Our Process", href: "/#process" },
     { label: "Services", href: "/#services" },
-    { label: "Products", href: "/#process" },
-    { label: "Careers", href: "/careers" }, // Added Careers link here
+    { label: "Products", href: "*" },
+    { label: "Careers", href: "/careers" },
     { label: "Privacy Policy", href: "/policies" },
     { label: "Terms of Service", href: "/terms" },
   ];
@@ -45,7 +45,11 @@ const Footer = () => {
       name: "LinkedIn",
     },
     // { icon: Twitter, href: "#", name: "Twitter" },
-    { icon: Instagram, href: "https://www.instagram.com/yubhian_technologies/profilecard/?igsh=MWp2YmdiYmtjN2NlbQ==", name: "Instagram" },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/yubhian_technologies/profilecard/?igsh=MWp2YmdiYmtjN2NlbQ==",
+      name: "Instagram",
+    },
   ];
 
   return (
@@ -147,7 +151,7 @@ const Footer = () => {
               </div>
               <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-electric-blue flex-shrink-0" />
-                <span>Andhra Pradesh, India</span>
+                <span>Hyderabad, Telangana, India-500082</span>
               </div>
               <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400">
                 <Clock className="w-5 h-5 text-electric-blue flex-shrink-0" />
