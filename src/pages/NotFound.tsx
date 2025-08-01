@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowRight, Home, Sparkles } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import SEO from "../components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -21,10 +22,18 @@ const NotFound = () => {
   const goHome = () => navigate("/");
 
   return (
-    <section
-      ref={notFoundRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white px-6"
-    >
+    <>
+      <SEO
+        title="Page Not Found - 404 Error"
+        description="The page you're looking for doesn't exist. Return to Yubhian Technologies LLP homepage to explore our AI and technology solutions."
+        keywords="404 error, page not found, Yubhian Technologies, error page"
+        url={`https://yubhiantechnologies.com${location.pathname}`}
+        type="website"
+      />
+      <section
+        ref={notFoundRef}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white px-6"
+      >
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -162,6 +171,7 @@ const NotFound = () => {
         </p>
       </div>
     </section>
+    </>
   );
 };
 
