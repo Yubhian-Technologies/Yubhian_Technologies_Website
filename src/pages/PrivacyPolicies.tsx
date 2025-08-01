@@ -15,7 +15,7 @@ function PrivacyPolicies() {
         title="Privacy Policy"
         description="Read our comprehensive privacy policy to understand how Yubhian Technologies LLP collects, uses, and protects your personal information and data."
         keywords="privacy policy, data protection, personal information, data privacy, user privacy, GDPR compliance, data security"
-        url="https://yubhiantechnologies.com/privacy"
+        url="https://www.yubhiantechnologies.in/privacy"
         type="website"
       />
       <Navigation />

@@ -21,8 +21,8 @@ const Index = () => {
     "@type": "Organization",
     "name": "Yubhian Technologies LLP",
     "description": "Leading AI startup providing cutting-edge artificial intelligence, machine learning, web development, blockchain solutions, and custom software development services for enterprises worldwide.",
-    "url": "https://yubhian-technologies-website.vercel.app/",
-    "logo": "https://yubhian-technologies-website.vercel.app/logo_bg.png",
+    "url": "https://www.yubhiantechnologies.in/",
+    "logo": "https://www.yubhiantechnologies.in/logo_bg.png",
     "foundingDate": "2024",
     "legalName": "Yubhian Technologies LLP",
     "slogan": "Transforming businesses with AI-powered solutions",
@@ -125,7 +125,7 @@ const Index = () => {
         title="Yubhian Technologies LLP - Leading AI & Technology Solutions Provider | AI Startup India"
         description="Yubhian Technologies LLP is a cutting-edge AI startup specializing in artificial intelligence, machine learning, web development, blockchain solutions, and custom software development. Transform your business with enterprise-grade technology solutions."
         keywords="AI startup India, artificial intelligence company, machine learning solutions, AI development, web development company, blockchain development, custom software development, technology consulting, enterprise AI solutions, digital transformation, tech startup, AI consulting, ML solutions, deep learning, data science, automation solutions"
-        url="https://yubhian-technologies-website.vercel.app/"
+        url="https://www.yubhiantechnologies.in/"
         type="website"
         schema={homePageSchema}
         tags={["AI", "Machine Learning", "Web Development", "Blockchain", "Startup", "Technology"]}

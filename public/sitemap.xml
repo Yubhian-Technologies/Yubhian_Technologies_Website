@@ -8,7 +8,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://yubhiantechnologies.com/</loc>
+    <loc>https://www.yubhiantechnologies.in/</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,7 +16,7 @@
 
   <!-- Careers Page -->
   <url>
-    <loc>https://yubhiantechnologies.com/careers</loc>
+    <loc>https://www.yubhiantechnologies.in/careers</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -24,7 +24,7 @@
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://yubhiantechnologies.com/privacy</loc>
+    <loc>https://www.yubhiantechnologies.in/privacy</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
@@ -32,7 +32,7 @@
 
   <!-- Terms and Conditions -->
   <url>
-    <loc>https://yubhiantechnologies.com/terms</loc>
+    <loc>https://www.yubhiantechnologies.in/terms</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
@@ -40,7 +40,7 @@
 
   <!-- Services and Solutions (derived from main page sections) -->
   <url>
-    <loc>https://yubhiantechnologies.com/#services</loc>
+    <loc>https://www.yubhiantechnologies.in/#services</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -48,7 +48,7 @@
 
   <!-- About Section -->
   <url>
-    <loc>https://yubhiantechnologies.com/#about</loc>
+    <loc>https://www.yubhiantechnologies.in/#about</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -56,7 +56,7 @@
 
   <!-- Contact Section -->
   <url>
-    <loc>https://yubhiantechnologies.com/#contact</loc>
+    <loc>https://www.yubhiantechnologies.in/#contact</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -64,7 +64,7 @@
 
   <!-- Technology Features -->
   <url>
-    <loc>https://yubhiantechnologies.com/#features</loc>
+    <loc>https://www.yubhiantechnologies.in/#features</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -72,7 +72,7 @@
 
   <!-- Process and Methodology -->
   <url>
-    <loc>https://yubhiantechnologies.com/#process</loc>
+    <loc>https://www.yubhiantechnologies.in/#process</loc>
     <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

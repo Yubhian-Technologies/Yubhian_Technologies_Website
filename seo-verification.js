@@ -136,7 +136,7 @@ try {
 // Check 9: Sitemap exists
 try {
   const sitemap = fs.readFileSync(path.join(__dirname, 'public/sitemap.xml'), 'utf8');
-  if (sitemap.includes('<urlset') && sitemap.includes('yubhiantechnologies.com')) {
+  if (sitemap.includes('<urlset') && sitemap.includes('yubhiantechnologies.in')) {
     score++;
     passes.push('✅ XML Sitemap properly configured');
   } else {

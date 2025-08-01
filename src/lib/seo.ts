@@ -63,8 +63,8 @@ export const defaultSEO: SEOMetadata = {
     'tech consulting',
     'digital transformation'
   ],
-  image: 'https://yubhiantechnologies.com/logo_bg.png',
-  url: 'https://yubhiantechnologies.com',
+  image: 'https://www.yubhiantechnologies.in/logo_bg.png',
+  url: 'https://www.yubhiantechnologies.in',
   type: 'website'
 };
 
@@ -83,8 +83,8 @@ export const organizationStructuredData: StructuredDataOrganization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Yubhian Technologies LLP',
-  url: 'https://yubhiantechnologies.com',
-  logo: 'https://yubhiantechnologies.com/logo_bg.png',
+  url: 'https://www.yubhiantechnologies.in',
+  logo: 'https://www.yubhiantechnologies.in/logo_bg.png',
   description: 'Innovative AI startup delivering cutting-edge artificial intelligence and machine learning solutions',
   foundingDate: '2023',
   founders: [
@@ -106,7 +106,7 @@ export const organizationStructuredData: StructuredDataOrganization = {
       '@type': 'ContactPoint',
       telephone: '+91-XXXXXXXXXX',
       contactType: 'customer service',
-      email: 'contact@yubhiantechnologies.com'
+      email: 'contact@yubhiantechnologies.in'
     }
   ],
   sameAs: [
@@ -162,7 +162,7 @@ export const generateJobPostingStructuredData = (job: {
     hiringOrganization: {
       '@type': 'Organization',
       name: 'Yubhian Technologies LLP',
-      sameAs: 'https://yubhiantechnologies.com'
+      sameAs: 'https://www.yubhiantechnologies.in'
     },
     jobLocation: {
       '@type': 'Place',
@@ -206,7 +206,7 @@ export const validateSEO = (metadata: SEOMetadata): { isValid: boolean; issues: 
 
 // URL utilities
 export const generateCanonicalUrl = (path: string): string => {
-  const baseUrl = 'https://yubhiantechnologies.com';
+  const baseUrl = 'https://www.yubhiantechnologies.in';
   return `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`;
 };
 

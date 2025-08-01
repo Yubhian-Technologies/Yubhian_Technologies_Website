@@ -27,7 +27,7 @@ const NotFound = () => {
         title="Page Not Found - 404 Error"
         description="The page you're looking for doesn't exist. Return to Yubhian Technologies LLP homepage to explore our AI and technology solutions."
         keywords="404 error, page not found, Yubhian Technologies, error page"
-        url={`https://yubhiantechnologies.com${location.pathname}`}
+        url={`https://www.yubhiantechnologies.in${location.pathname}`}
         type="website"
       />
       <section

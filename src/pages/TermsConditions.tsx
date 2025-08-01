@@ -15,7 +15,7 @@ function TermsCondiitions() {
         title="Terms and Conditions"
         description="Read the terms and conditions for Yubhian Technologies LLP. Understand our service terms, user responsibilities, and legal agreements for our AI and technology solutions."
         keywords="terms and conditions, legal terms, service agreement, user agreement, Yubhian Technologies terms, AI service terms"
-        url="https://yubhiantechnologies.com/terms"
+        url="https://www.yubhiantechnologies.in/terms"
         type="website"
       />
       <Navigation />

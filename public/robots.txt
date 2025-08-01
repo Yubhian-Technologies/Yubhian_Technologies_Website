@@ -14,7 +14,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://yubhiantechnologies.com/sitemap.xml
+Sitemap: https://www.yubhiantechnologies.in/sitemap.xml
 
 # Crawl delay for respectful crawling
 Crawl-delay: 1

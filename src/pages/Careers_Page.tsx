@@ -15,7 +15,7 @@ function CareersPage() {
         title="Careers - Join Our AI Innovation Team"
         description="Explore exciting career opportunities at Yubhian Technologies LLP. Join our team of AI experts and technology innovators. We're building the future of artificial intelligence."
         keywords="AI careers, technology jobs, machine learning positions, AI startup jobs, tech careers India, software developer jobs, data scientist positions"
-        url="https://yubhiantechnologies.com/careers"
+        url="https://www.yubhiantechnologies.in/careers"
         type="website"
       />
       <Navigation />
