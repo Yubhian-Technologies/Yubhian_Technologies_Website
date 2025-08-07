@@ -93,11 +93,8 @@ const Navigation = () => {
 
             <div className="hidden xs:block">
               <h1 className="font-bold text-white transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-lg">
-                Yubhian Technologies
+                Yubhian Technologies LLP
               </h1>
-              <p className="text-xs sm:text-xs md:text-sm text-gray-400 -mt-0.5 sm:-mt-1 transition-all duration-300">
-                EST. 2024
-              </p>
             </div>
           </div>
 

@@ -43,9 +43,6 @@ const HeroSection = () => {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <span className="inline-block px-4 py-2 rounded-full glass-effect text-sm font-medium text-gray-300 tracking-wider uppercase">
-              EST. 2024
-            </span>
           </div>
 
           {/* Main Headline */}
@@ -80,8 +77,7 @@ const HeroSection = () => {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            Specializing in AI/ML, Web Development, AI-Agents, Blockchain, and custom
-            solutions to drive your business growth and digital transformation.
+            We deliver high-quality custom software and SaaS solutions tailored to your business needs. Our expertise spans AI/ML, Web Development, AI Agents, Blockchain, workflow automation, and data analytics.
           </p>
 
           {/* CTA Buttons */}
