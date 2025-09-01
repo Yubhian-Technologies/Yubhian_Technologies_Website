@@ -37,7 +37,6 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Optional custom validation example
     if (!formData.email.includes("@")) {
       setSubmitStatus({
         isSubmitting: false,
@@ -116,7 +115,7 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "Info@yubhiantechnologies.in",
+      content: "info@yubhiantechnologies.in",
       href: "mailto:Info@yubhiantechnologies.in",
     },
     {
@@ -152,8 +151,52 @@ const ContactSection = () => {
           </p>
         </div>
 
+        {/* Grid with Contact Info Left & Form Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Contact Info Section */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Contact Information
+              </h3>
+            </div>
+
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => {
+                const IconComponent = info.icon;
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-4 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 cursor-pointer group"
+                    style={{
+                      animation: `fadeIn 0.6s ease-out ${index * 0.1}s both`,
+                    }}
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">
+                        {info.title}
+                      </h4>
+                      {info.href.startsWith("#") ? (
+                        <p className="text-gray-400">{info.content}</p>
+                      ) : (
+                        <a
+                          href={info.href}
+                          className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                        >
+                          {info.content}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Contact Form (Now on Right) */}
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -266,52 +309,10 @@ const ContactSection = () => {
               </button>
             </form>
           </div>
-
-          {/* Contact Info Section */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Contact Information
-              </h3>
-            </div>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const IconComponent = info.icon;
-                return (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-4 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 cursor-pointer group"
-                    style={{
-                      animation: `fadeIn 0.6s ease-out ${index * 0.1}s both`,
-                    }}
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">
-                        {info.title}
-                      </h4>
-                      {info.href.startsWith("#") ? (
-                        <p className="text-gray-400">{info.content}</p>
-                      ) : (
-                        <a
-                          href={info.href}
-                          className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                        >
-                          {info.content}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
       </div>
 
+      {/* Animations */}
       <style>{`
         @keyframes fadeIn {
           from {
