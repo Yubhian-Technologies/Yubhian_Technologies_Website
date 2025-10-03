@@ -39,7 +39,7 @@
     "development_process": "The journey begins with hardware selection and architecture design. We then develop and test the firmware iteratively. This is followed by building the cloud backend and data visualization tools. Rigorous field testing ensures the device is reliable and performs as expected in real-world conditions."
   },
   {
-    "id": "ai-ml-solutions",
+    "id": "aiml-solutions",
     "title": "AI/ML Solutions",
     "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     "long_description": "Leverage the power of intelligent automation and predictive analytics with our cutting-edge AI and Machine Learning solutions. We help you unlock insights from your data, automate complex tasks, and create smarter products and services that provide a competitive advantage.",
