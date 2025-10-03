@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Code,
   Smartphone,
@@ -11,7 +12,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-// Gradient color for each card
 const GRADIENTS = [
   "from-sky-500 to-indigo-600",
   "from-electric-blue to-brand-violet",
@@ -42,7 +42,7 @@ const services = [
     description:
       "Smart connected devices and embedded systems solutions to bring your hardware ideas to life.",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://res.cloudinary.com/dl88qtudz/image/upload/v1759478277/iotimage_egnjzf.webp",
   },
   {
     icon: Brain,
@@ -94,6 +94,15 @@ const services = [
   },
 ];
 
+// Helper to create URL-friendly slugs
+const toUrlSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .replace(/ & /g, "-")
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
+};
+
 const ServicesSection = () => (
   <section
     id="services"
@@ -107,20 +116,20 @@ const ServicesSection = () => (
           <span className="text-white">What We Offer</span>
         </h2>
         <p className="text-base md:text-lg text-gray-400 max-w-xl md:max-w-3xl mx-auto leading-relaxed">
-          Comprehensive technology solutions designed to drive your business
-          forward. From concept to deployment, we've got you covered.
+          Comprehensive technology solutions designed to drive your business forward. From concept to deployment, we've got you covered.
         </p>
-        <a
-          href="#contact"
+        <Link
+          to="#contact"
           className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-electric-blue to-brand-violet rounded-full text-white font-medium hover:shadow-lg hover:shadow-electric-blue/30 transition-all duration-300"
         >
           Get a Quote Now
-        </a>
+        </Link>
       </div>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service, i) => {
           const Icon = service.icon;
+          const serviceId = toUrlSlug(service.title);
           return (
             <div
               key={service.title}
@@ -131,12 +140,10 @@ const ServicesSection = () => (
                 duration-400
                 border border-transparent hover:border-electric-blue/60
                 hover:-translate-y-2
-                cursor-pointer
                 flex flex-col
                 min-h-[400px]
               `}
             >
-              {/* Card Image as background with overlay */}
               <div className="absolute inset-0 z-0">
                 <img
                   src={service.image}
@@ -151,9 +158,7 @@ const ServicesSection = () => (
                 <div className="absolute inset-0 bg-rich-black/60" />
               </div>
 
-              {/* Card Content */}
               <div className="relative z-10 p-6 flex flex-col flex-1">
-                {/* Icon in gradient orb */}
                 <span
                   className={`mb-4 inline-flex items-center justify-center rounded-xl p-4 bg-gradient-to-br ${
                     GRADIENTS[i % GRADIENTS.length]
@@ -161,22 +166,19 @@ const ServicesSection = () => (
                 >
                   <Icon className="w-7 h-7 text-white drop-shadow" />
                 </span>
-                {/* Title */}
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-electric-blue transition-colors duration-300">
                   {service.title}
                 </h3>
-                {/* Description */}
                 <p className="text-base text-gray-300 leading-relaxed flex-1">
                   {service.description}
                 </p>
-                {/* View More link at the card bottom */}
                 <div className="mt-6">
-                  <a
-                    href="#contact"
+                  <Link
+                    to={`/service/${serviceId}`}
                     className="inline-block text-electric-blue hover:underline font-semibold transition"
                   >
                     View More &rarr;
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

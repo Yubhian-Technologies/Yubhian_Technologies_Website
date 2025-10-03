@@ -2,18 +2,17 @@ import React from "react";
 import {
   ArrowUp,
   Linkedin,
-  Twitter,
-  Github,
   Instagram,
   Mail,
   Phone,
   MapPin,
   Clock,
+  X,
 } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import ScrollToTopButton from "./ScrollToTopButton";
-
+import TwitterXIcon from "../lib/TwitterIcon";
 const Footer = () => {
   const services = [
     "AI/ML Development",
@@ -49,6 +48,11 @@ const Footer = () => {
       icon: Instagram,
       href: "https://www.instagram.com/yubhian_technologies/",
       name: "Instagram",
+    },
+    {
+      icon: TwitterXIcon,
+      href: "https://x.com/yubhiantech",
+      name: "X (Twitter)",
     },
   ];
 
