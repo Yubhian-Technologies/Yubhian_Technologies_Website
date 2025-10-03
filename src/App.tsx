@@ -9,7 +9,14 @@ import TermsCondiitions from "./pages/TermsConditions";
 import PrivacyPolicies from "./pages/PrivacyPolicies";
 import CareersPage from "./pages/Careers_Page";
 
+// Import the new form components
+import InternshipForm from "./components/InternshipForm";
+import SoftwareDeveloperForm from "./components/SoftwareDeveloperForm";
+import ServiceDetailPage from "./pages/ServiceDetailPage";
+
+
 const queryClient = new QueryClient();
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -18,16 +25,25 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Your existing routes */}
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
           <Route path="/terms" element={<TermsCondiitions />} />
           <Route path="/policies" element={<PrivacyPolicies />} />
           <Route path="/careers" element={<CareersPage />} />
+         
+          <Route path="/apply/internship" element={<InternshipForm />} />
+          <Route
+            path="/apply/software-developer"
+            element={<SoftwareDeveloperForm />}
+          />
+          <Route path="/service/:serviceId" element={<ServiceDetailPage />} />
+         
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
+
 
 export default App;

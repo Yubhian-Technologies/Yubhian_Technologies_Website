@@ -1,197 +1,192 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
-  Bot,
-  Brain,
   Code,
-  GraduationCap,
-  Link2,
-  Server,
-  TrendingUp,
-  ArrowLeft,
-  ArrowRight,
+  Smartphone,
+  Cpu,
+  Brain,
+  Workflow,
+  Rocket,
   BarChart3,
+  Settings,
+  GraduationCap,
 } from "lucide-react";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+const GRADIENTS = [
+  "from-sky-500 to-indigo-600",
+  "from-electric-blue to-brand-violet",
+  "from-brand-violet to-brand-emerald",
+  "from-brand-emerald to-electric-blue",
+];
 
-const ServicesSection = () => {
-  const [isMobile, setIsMobile] = useState(false);
+const services = [
+  {
+    icon: Code,
+    title: "Custom Software & Web Development",
+    description:
+      "Tailored software solutions and responsive web applications designed to meet your specific business requirements.",
+    image:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: Smartphone,
+    title: "Robust Mobile Application Development",
+    description:
+      "High-performance mobile apps for iOS and Android platforms with intuitive UI/UX and seamless functionality.",
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: Cpu,
+    title: "IoT & Embedded Systems Design",
+    description:
+      "Smart connected devices and embedded systems solutions to bring your hardware ideas to life.",
+    image:
+      "https://res.cloudinary.com/dl88qtudz/image/upload/v1759478277/iotimage_egnjzf.webp",
+  },
+  {
+    icon: Brain,
+    title: "AI/ML Solutions",
+    description:
+      "Intelligent automation and predictive analytics powered by cutting-edge artificial intelligence and machine learning.",
+    image:
+      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: Workflow,
+    title: "Automate Work Flows",
+    description:
+      "Streamline your business processes with customized automation solutions that reduce manual effort and errors.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: Rocket,
+    title: "Innovation Prototyping for Startups",
+    description:
+      "Rapid prototyping services to help startups validate their ideas and accelerate time-to-market.",
+    image:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: BarChart3,
+    title: "Data Analytics for Your Business",
+    description:
+      "Actionable insights from your data with advanced analytics, visualization, and business intelligence tools.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: Settings,
+    title: "Software Maintenance & Support",
+    description:
+      "Comprehensive maintenance and support services to keep your software running smoothly and securely.",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    icon: GraduationCap,
+    title: "Skilling & Internship Programs",
+    description:
+      "Industry-relevant training programs and internships to bridge the gap between academia and real-world requirements.",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+];
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const services = [
-    {
-      icon: BarChart3,
-      title: "Data Analyst",
-      description:
-        "Advanced data analysis and visualization solutions to transform raw data into actionable business insights and strategic decisions.",
-      gradient: "from-sky-500 to-indigo-600",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Data Visualization",
-        "Statistical Analysis",
-        "Business Intelligence",
-      ],
-    },
-    {
-      icon: Brain,
-      title: "AI/ML Projects",
-      description:
-        "Cutting-edge artificial intelligence and machine learning solutions to automate and optimize your business processes.",
-      gradient: "from-electric-blue to-brand-violet",
-      image:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      icon: Code,
-      title: "Web Development",
-      description:
-        "Modern, responsive web applications built with the latest technologies and best practices for optimal performance.",
-      gradient: "from-brand-violet to-brand-emerald",
-      image:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      icon: GraduationCap,
-      title: "Training for Students",
-      description:
-        "Comprehensive training programs to equip students with industry-relevant skills in technology and development.",
-      gradient: "from-brand-emerald to-electric-blue",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      icon: Link2,
-      title: "Blockchain Solutions",
-      description:
-        "Secure, decentralized blockchain applications and smart contracts for transparent business operations.",
-      gradient: "from-electric-blue to-brand-violet",
-      image:
-        "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      icon: Server,
-      title: "Backend Services",
-      description:
-        "Robust, scalable backend infrastructure and APIs to power your applications with reliability and security.",
-      gradient: "from-brand-violet to-brand-emerald",
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      icon: TrendingUp,
-      title: "SEO Optimization",
-      description:
-        "Comprehensive SEO strategies to improve your online visibility and drive organic traffic to your business.",
-      gradient: "from-brand-emerald to-electric-blue",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    },
-  ];
-
-  return (
-    <section
-      id="services"
-      className="section-padding bg-gradient-to-b from-transparent to-rich-black/50"
-    >
-      <div className="container-custom">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 md:mb-6">
-            <span className="gradient-text">Technology Solutions</span>
-            <br />
-            <span className="text-white">Tailored for Your Success</span>
-          </h2>
-          <p className="text-base md:text-lg text-gray-400 max-w-xl md:max-w-3xl mx-auto leading-relaxed">
-            We provide comprehensive IT services designed to drive innovation
-            and accelerate your business growth through cutting-edge technology
-            solutions.
-          </p>
-        </div>
-
-        <div className="relative px-2 sm:px-6 md:px-12">
-          <Swiper
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={isMobile ? 0.5 : 2.5}
-            loop={true}
-            navigation={{
-              nextEl: ".swiper-button-next-custom",
-              prevEl: ".swiper-button-prev-custom",
-            }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            coverflowEffect={{
-              rotate: 30,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: false,
-            }}
-            modules={[EffectCoverflow, Navigation, Autoplay]}
-            className="!overflow-visible"
-          >
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <SwiperSlide key={index}>
-                  {({ isActive }) => (
-                    <div
-                      className={`group rounded-3xl bg-rich-black/50 backdrop-blur-md transition-all duration-500 overflow-hidden mx-auto cursor-pointer relative shadow-lg hover:shadow-2xl hover:shadow-electric-blue/20 ${
-                        isActive
-                          ? "scale-105 border border-electric-blue"
-                          : "scale-95"
-                      } w-[90vw] sm:w-[80vw] md:w-[60vw] lg:w-[25rem]`}
-                    >
-                      <div className="relative h-48 sm:h-56 overflow-hidden">
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute top-4 left-4 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                        </div>
-                      </div>
-                      <div className="p-5 sm:p-6 md:p-7">
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-electric-blue transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 line-clamp-3">
-                          {service.description}
-                        </p>
-                      </div>
-                      <div
-                        className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10`}
-                      />
-                    </div>
-                  )}
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-          <div className="swiper-button-prev-custom absolute md:bottom-1/2 mt-10 md:mt-0 left-[-10px] z-10 cursor-pointer p-2 hover:scale-110 bg-black/50 backdrop-blur rounded-full hover:bg-black/50 transition">
-            <ArrowLeft />
-          </div>
-          <div className="swiper-button-next-custom absolute md:bottom-1/2 mt-10 md:mt-0 right-[-10px] z-10 cursor-pointer p-2 hover:scale-110 bg-black/50 backdrop-blur rounded-full hover:bg-black/50 transition">
-            <ArrowRight />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+// Helper to create URL-friendly slugs
+const toUrlSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .replace(/ & /g, "-")
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
 };
+
+const ServicesSection = () => (
+  <section
+    id="services"
+    className="section-padding bg-gradient-to-b from-transparent to-rich-black/50"
+  >
+    <div className="container-custom">
+      <div className="text-center mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 md:mb-6">
+          <span className="gradient-text">Our Services</span>
+          <br />
+          <span className="text-white">What We Offer</span>
+        </h2>
+        <p className="text-base md:text-lg text-gray-400 max-w-xl md:max-w-3xl mx-auto leading-relaxed">
+          Comprehensive technology solutions designed to drive your business forward. From concept to deployment, we've got you covered.
+        </p>
+        <Link
+          to="#contact"
+          className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-electric-blue to-brand-violet rounded-full text-white font-medium hover:shadow-lg hover:shadow-electric-blue/30 transition-all duration-300"
+        >
+          Get a Quote Now
+        </Link>
+      </div>
+
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((service, i) => {
+          const Icon = service.icon;
+          const serviceId = toUrlSlug(service.title);
+          return (
+            <div
+              key={service.title}
+              className={`
+                group relative bg-rich-black/70 
+                rounded-3xl overflow-hidden
+                shadow-xl hover:shadow-2xl transition
+                duration-400
+                border border-transparent hover:border-electric-blue/60
+                hover:-translate-y-2
+                flex flex-col
+                min-h-[400px]
+              `}
+            >
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover object-center opacity-70 transition group-hover:scale-105 duration-500"
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-tr ${
+                    GRADIENTS[i % GRADIENTS.length]
+                  } opacity-50`}
+                ></div>
+                <div className="absolute inset-0 bg-rich-black/60" />
+              </div>
+
+              <div className="relative z-10 p-6 flex flex-col flex-1">
+                <span
+                  className={`mb-4 inline-flex items-center justify-center rounded-xl p-4 bg-gradient-to-br ${
+                    GRADIENTS[i % GRADIENTS.length]
+                  } shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <Icon className="w-7 h-7 text-white drop-shadow" />
+                </span>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-electric-blue transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-base text-gray-300 leading-relaxed flex-1">
+                  {service.description}
+                </p>
+                <div className="mt-6">
+                  <Link
+                    to={`/service/${serviceId}`}
+                    className="inline-block text-electric-blue hover:underline font-semibold transition"
+                  >
+                    View More &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
 
 export default ServicesSection;

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "custom-software-web-development",
+    "title": "Custom Software & Web Development",
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "We specialize in creating bespoke software solutions from the ground up, perfectly aligned with your business processes. Our web development services focus on building fast, scalable, and secure applications using modern technology stacks. We follow an agile development process, ensuring transparency and flexibility throughout the project lifecycle.",
+    "offerings": [
+      "Full-stack web application development (React, Node.js, .NET)",
+      "Enterprise software solutions and ERP systems",
+      "Custom API development and third-party integrations",
+      "Progressive Web Apps (PWAs) and Single Page Applications (SPAs)"
+    ],
+    "development_process": "Our process begins with a deep dive into your requirements. We then move to UI/UX design, followed by iterative development sprints with continuous feedback loops. Rigorous testing is performed at every stage to ensure a high-quality, bug-free product. We conclude with seamless deployment and provide ongoing support and maintenance."
+  },
+  {
+    "id": "robust-mobile-application-development",
+    "title": "Robust Mobile Application Development",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Our mobile development team builds high-performance native and cross-platform applications that offer a rich and intuitive user experience. We focus on performance, security, and scalability, ensuring your app can grow with your user base. From concept to App Store submission, we handle the entire lifecycle.",
+    "offerings": [
+      "Native iOS (Swift) and Android (Kotlin) development",
+      "Cross-platform development with Flutter and React Native",
+      "Mobile backend development (Firebase, AWS Amplify) and API integration",
+      "App maintenance, updates, and performance monitoring"
+    ],
+    "development_process": "We start with a comprehensive strategy and prototyping phase. Once the design is finalized, we develop the app in sprints, with regular demos for your review. After comprehensive testing on a wide range of devices, we manage the entire submission process to the Apple App Store and Google Play Store."
+  },
+  {
+    "id": "iot-embedded-systems-design",
+    "title": "IoT & Embedded Systems Design",
+    "image": "https://res.cloudinary.com/dl88qtudz/image/upload/v1759478277/iotimage_egnjzf.webp",
+    "long_description": "We engineer smart, connected devices and embedded systems that bridge the physical and digital worlds. Our expertise covers everything from hardware selection and firmware development to cloud connectivity and data management, turning your innovative hardware ideas into market-ready products.",
+    "offerings": [
+      "Custom PCB design and prototyping",
+      "Firmware development for microcontrollers (e.g., ESP32, Arduino, STM32)",
+      "Wireless communication protocols (LoRa, BLE, Wi-Fi, NB-IoT)",
+      "IoT cloud platform integration and dashboard development"
+    ],
+    "development_process": "The journey begins with hardware selection and architecture design. We then develop and test the firmware iteratively. This is followed by building the cloud backend and data visualization tools. Rigorous field testing ensures the device is reliable and performs as expected in real-world conditions."
+  },
+  {
+    "id": "ai-ml-solutions",
+    "title": "AI/ML Solutions",
+    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Leverage the power of intelligent automation and predictive analytics with our cutting-edge AI and Machine Learning solutions. We help you unlock insights from your data, automate complex tasks, and create smarter products and services that provide a competitive advantage.",
+    "offerings": [
+      "Predictive modeling and data analysis",
+      "Natural Language Processing (NLP) and chatbot development",
+      "Computer Vision and image recognition systems",
+      "ML model deployment and MLOps"
+    ],
+    "development_process": "We start with data exploration and feasibility analysis. After defining the problem, we pre-process data and train various models to find the best fit. The selected model is then integrated into your existing systems and deployed. We continuously monitor and retrain the model to maintain its accuracy."
+  },
+  {
+    "id": "automate-work-flows",
+    "title": "Automate Work Flows",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Streamline your business processes and eliminate repetitive tasks with our customized automation solutions. We analyze your current workflows and implement robotic process automation (RPA) and software integrations to reduce manual effort, minimize errors, and boost overall efficiency.",
+    "offerings": [
+      "Business process analysis and optimization",
+      "Robotic Process Automation (RPA) implementation",
+      "Custom script development for task automation",
+      "Integration of disparate systems using APIs"
+    ],
+    "development_process": "Our process involves identifying and documenting automatable tasks within your operations. We then design an optimized workflow, develop the automation scripts or bots, and test them thoroughly in a controlled environment before deploying them into your live business processes."
+  },
+  {
+    "id": "innovation-prototyping-for-startups",
+    "title": "Innovation Prototyping for Startups",
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Turn your groundbreaking idea into a tangible product with our rapid prototyping services. We help startups quickly build and test a Minimum Viable Product (MVP) to validate their concept, gather user feedback, and secure investor funding, significantly accelerating time-to-market.",
+    "offerings": [
+      "Proof of Concept (PoC) and MVP development",
+      "Interactive UI/UX wireframes and mockups",
+      "Functional prototypes for user testing",
+      "Technical feasibility assessments"
+    ],
+    "development_process": "We focus on speed and core functionality. Starting with a workshop to define the MVP scope, we rapidly design and build the essential features. This allows for quick iterations based on user feedback, ensuring the final product is aligned with market needs before significant investment."
+  },
+  {
+    "id": "data-analytics-for-your-business",
+    "title": "Data Analytics for Your Business",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Transform your raw data into actionable insights with our advanced analytics and business intelligence services. We help you make data-driven decisions by creating custom dashboards, generating reports, and uncovering hidden trends within your business data.",
+    "offerings": [
+      "Business Intelligence (BI) dashboard development (Tableau, Power BI)",
+      "Data warehousing and ETL pipeline construction",
+      "Custom data visualizations and reporting tools",
+      "Customer segmentation and performance analysis"
+    ],
+    "development_process": "We begin by understanding your key business questions and identifying relevant data sources. We then build robust data pipelines to collect and process information. Finally, we create intuitive dashboards and reports that provide clear, actionable insights for your team."
+  },
+  {
+    "id": "software-maintenance-support",
+    "title": "Software Maintenance & Support",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Keep your software applications running smoothly, securely, and up-to-date with our comprehensive maintenance and support services. We provide proactive monitoring, bug fixes, performance optimization, and feature enhancements to ensure the longevity and reliability of your systems.",
+    "offerings": [
+      "24/7 application monitoring and incident response",
+      "Regular security patching and updates",
+      "Bug fixes and performance tuning",
+      "Dedicated helpdesk support for your users"
+    ],
+    "development_process": "Our support plans are tailored to your needs. We establish a Service Level Agreement (SLA) and set up monitoring tools. Our team works proactively to prevent issues and responds quickly when problems arise, ensuring minimal disruption to your business operations."
+  },
+  {
+    "id": "skilling-internship-programs",
+    "title": "Skilling & Internship Programs",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "long_description": "Bridge the gap between academia and industry with our specialized training programs and hands-on internships. We partner with educational institutions and corporations to equip students and professionals with the real-world skills needed to excel in the tech industry.",
+    "offerings": [
+      "Corporate training on emerging technologies",
+      "Project-based internship programs for students",
+      "Custom curriculum development for colleges",
+      "Full-stack development and cloud computing bootcamps"
+    ],
+    "development_process": "Our programs are designed by industry experts. They combine theoretical knowledge with practical, hands-on projects that simulate real-world work environments. Interns are mentored by our senior developers, contributing to live projects and gaining invaluable experience."
+  }
+]
