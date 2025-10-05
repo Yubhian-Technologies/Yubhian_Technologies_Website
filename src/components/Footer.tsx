@@ -166,7 +166,7 @@ const Footer = () => {
               </div>
               <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400 select-text">
                 <Clock className="w-5 h-5 text-electric-blue flex-shrink-0" />
-                <span>Mon-Sat: 9AM-6PM</span>
+                <span>Mon-Fri: 9AM-6PM</span>
               </div>
             </div>
 

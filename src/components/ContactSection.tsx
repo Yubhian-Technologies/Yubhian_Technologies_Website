@@ -157,7 +157,7 @@ const ContactSection = () => {
     { icon: Phone, title: "Phone", content: "+91 8500401091", href: "tel:+918500401091" },
     { icon: Mail, title: "Email", content: "info@yubhiantechnologies.in", href: "mailto:Info@yubhiantechnologies.in" },
     { icon: MapPin, title: "Location", content: "4th Floor, Koutilya complex, Maheshwari Chambars, near Irramanzil metro, towards Khairatabad pillar number 1144, somajiguda, Hyderabad, Telangana, India-500082", href: "#" },
-    { icon: Clock, title: "Business Hours", content: "Mon–Sat, 9AM–6PM", href: "#" },
+    { icon: Clock, title: "Business Hours", content: "Mon–Fri, 9AM–6PM", href: "#" },
   ];
 
   const topics = ["Service Inquiry", "Careers", "Others"];
