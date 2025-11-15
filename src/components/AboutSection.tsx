@@ -24,7 +24,7 @@ const AboutSection = () => {
   ];
 
   const affiliates = [
-    { name: 'AICTE', desc: 'All India Council for Technical Education', icon: GraduationCap },
+    // { name: 'AICTE', desc: 'All India Council for Technical Education', icon: GraduationCap },
     { name: 'MSME', desc: 'Micro, Small & Medium Enterprises', icon: Building2 },
     { name: 'StartupIndia', desc: 'Government of India Initiative', icon: Rocket }
   ];
@@ -86,7 +86,7 @@ const AboutSection = () => {
         {/* Affiliates - Full Width */}
         <div className={`mt-20 glass-effect p-8 rounded-2xl transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h3 className="text-xl font-bold text-white mb-8 text-center">Our Affiliates</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 justify-center gap-6 mx-auto">
             {affiliates.map((affiliate, index) => {
               const IconComponent = affiliate.icon;
               return (
