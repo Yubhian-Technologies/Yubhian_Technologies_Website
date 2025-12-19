@@ -160,9 +160,16 @@ const Footer = () => {
                   +91 8500401091
                 </a>
               </div>
+                <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400 select-text">
+                <MapPin className="w-5 h-5 text-electric-blue flex-shrink-0" />
+                <span>Saravana Bhavan, Akividu, W/G/DT, AP, India</span>
+              </div>
+
               <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400 select-text">
                 <MapPin className="w-5 h-5 text-electric-blue flex-shrink-0" />
-                <span>Hyderabad, Telangana, India-500082</span>
+                <span>
+                    Viswa TBI, Vishnu Institute of Technology, Bhimavaram, W/G/DT, AP, India
+                </span>
               </div>
               <div className="flex justify-center md:justify-start items-center space-x-3 text-gray-400 select-text">
                 <Clock className="w-5 h-5 text-electric-blue flex-shrink-0" />
